@@ -70,6 +70,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv2" />
 
+
     <ImageView
         android:id="@+id/tou"
         android:layout_width="74dp"
@@ -78,5 +79,6 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv3" />
+
 
 </android.support.constraint.ConstraintLayout>

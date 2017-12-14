@@ -9,14 +9,17 @@ public class Player {
     private String name;
     private int age;
     private String country;
+
     private String photo;
 
     public Player(int id, String name, String country, int age, String photo) {
+
         this.id = id;
         this.name = name;
         this.country = country;
         this.age = age;
         this.photo = photo;
+
     }
 
     public int getId() {
@@ -52,6 +55,7 @@ public class Player {
         this.age = age;
     }
 
+
     public String getPhoto() {
         return photo;
     }
@@ -59,4 +63,5 @@ public class Player {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
 }

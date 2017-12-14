@@ -15,10 +15,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+
 import android.widget.ImageView;
+
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.squareup.picasso.Picasso;
 
@@ -31,6 +34,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +52,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     private TextView tv2;
     private TextView tv3;
     private ImageView tou;
+
     private ArrayList<Player> categoryList = new ArrayList<Player>();
     private ArrayList<String> nameList = new ArrayList<String>();
 
@@ -85,7 +91,6 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         tv3 = (TextView) findViewById(R.id.tv3);
         tou = (ImageView) findViewById(R.id.tou);
         //tou.setImageBitmap(returnBitMap("https://cdn.sofifa.org/48/18/players/20801.png"));
-
 
 
         List<String[]> list = new ArrayList<String[]>();
@@ -128,6 +133,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                 + categoryList.get(arg2).getCountry());
         tv3.setText("Age: "
                 + categoryList.get(arg2).getAge());
+
         Picasso.with(tou.getContext()).load(categoryList.get(arg2).getPhoto()).into(tou);
     }
 
