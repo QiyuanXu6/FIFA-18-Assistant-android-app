@@ -4,6 +4,6 @@
     <string name="button_send">Send</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Fuck</string>
+    <string name="title_dashboard">Team</string>
+    <string name="title_notifications">About</string>
 </resources>
