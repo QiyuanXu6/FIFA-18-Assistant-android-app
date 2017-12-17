@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.ImageView;
@@ -68,6 +69,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     private ImageView flag;
     private ImageView clublogo;
     private ListView listView;
+    private Button button;
 
     private PlayerData playerData;
     private TeamData teamData;
@@ -82,6 +84,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                  *  When pressing home
                  */
                 case R.id.navigation_home:
+                    mTextMessage.setText(R.string.title_home);
                     teamInsert.setVisibility(View.INVISIBLE);
                     tvMainSelectedCate.setVisibility(View.VISIBLE);
                     tv2.setVisibility(View.VISIBLE);
@@ -92,7 +95,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                     tou.setVisibility(View.VISIBLE);
                     flag.setVisibility(View.VISIBLE);
                     clublogo.setVisibility(View.VISIBLE);
-                    mTextMessage.setText(R.string.title_home);
+                    button.setVisibility(View.INVISIBLE);
                     playerSpinner.setVisibility(View.VISIBLE);
                     int currentPos = playerSpinner.getSelectedItemPosition();
                     tvMainSelectedCate.setText("Name: "
@@ -115,11 +118,10 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                      *  When pressing team
                      */
                     case R.id.navigation_dashboard:
-                        //Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
-                        //intent.putStringArrayListExtra("namelist", teamData.getNameList());
-                        //startActivity(intent);
+
                         mTextMessage.setText("Search Team");
                         teamInsert.setVisibility(View.VISIBLE);
+                        button.setVisibility(View.VISIBLE);
                         playerSpinner.setVisibility(View.INVISIBLE);
                         tvMainSelectedCate.setVisibility(View.INVISIBLE);
                         tv2.setVisibility(View.INVISIBLE);
@@ -148,6 +150,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                         clublogo.setVisibility(View.VISIBLE);
                         mTextMessage.setText("About Us");
                         playerSpinner.setVisibility(View.INVISIBLE);
+                        button.setVisibility(View.INVISIBLE);
                         tvMainSelectedCate.setText("Zhao Li");
                         tv2.setText("Qiyuan Xu");
                         tv3.setText("Hai Cao");
@@ -186,10 +189,9 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         flag = (ImageView) findViewById(R.id.flag);
         clublogo = (ImageView) findViewById(R.id.clublogo);
         teamInsert = (EditText) findViewById(R.id.teamInsert);
+        button = (Button) findViewById(R.id.button);
 
-        /*listView = new ListView(this);
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,playerData.getNameList()));
-        setContentView(listView);*/
+
 
         List<String[]> list = new ArrayList<String[]>();
         String next[] = {};
@@ -249,6 +251,13 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
 
+    }
+
+    public void searchTeam(View view) {
+        // Do something in response to button
+        Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
+        intent.putStringArrayListExtra("namelist", teamData.getNameList());
+        startActivity(intent);
     }
 
     private ArrayList<String> getData(){
