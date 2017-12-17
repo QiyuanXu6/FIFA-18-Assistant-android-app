@@ -1,6 +1,7 @@
 package com.example.lizhao.myfirstapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -56,6 +57,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     private TextView tvMainSelectedCate;
     private TextView tv2;
     private TextView tv3;
+    private TextView tv4;
     private ImageView tou;
 
     private ArrayList<Player> categoryList = new ArrayList<Player>();
@@ -72,12 +74,24 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
+                    tvMainSelectedCate.setText("Please select player");
+                    tv2.setText("");
+                    tv3.setText("");
+                    tv4.setText("");
+                    Picasso.with(tou.getContext()).load("https://cdn.pixabay.com/photo/2017/05/11/12/24/green-2304008_960_720.png").into(tou);
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
+                    Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
+                    startActivity(intent);
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    //mTextMessage.setText(R.string.title_notifications);
+                    tvMainSelectedCate.setText("Group FIFA");
+                    tv2.setText("Zhao Li");
+                    tv3.setText("Qiyuan Xu");
+                    tv4.setText("Hai Cao");
+                    Picasso.with(tou.getContext()).load("https://www.techwikies.com/wp-content/uploads/2017/11/g12AAB9UDF9LVJZYdO6lPdLIop30Y93iIart6wwUcPvX2GC8BCMCFFRkKheZyc6BHf90w300.png").into(tou);
                     return true;
             }
             return false;
@@ -100,6 +114,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         tvMainSelectedCate = (TextView) findViewById(R.id.tvMainSelectedCate);
         tv2 = (TextView) findViewById(R.id.tv2);
         tv3 = (TextView) findViewById(R.id.tv3);
+        tv4 = (TextView) findViewById(R.id.tv4);
         tou = (ImageView) findViewById(R.id.tou);
         //tou.setImageBitmap(returnBitMap("https://cdn.sofifa.org/48/18/players/20801.png"));
 
@@ -147,7 +162,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
             e.printStackTrace();
         }
         for (int i = 0; i < list.size(); i++) {
-            categoryList.add(new Player(Integer.parseInt(list.get(i)[0]), list.get(i)[2], list.get(i)[5], Integer.parseInt(list.get(i)[3]), list.get(i)[4]));
+            categoryList.add(new Player(Integer.parseInt(list.get(i)[0]), list.get(i)[2], list.get(i)[5], Integer.parseInt(list.get(i)[3]), list.get(i)[4], Integer.parseInt(list.get(i)[7])));
             nameList.add(list.get(i)[2]);
         }
 
@@ -167,6 +182,8 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                 + categoryList.get(arg2).getCountry());
         tv3.setText("Age: "
                 + categoryList.get(arg2).getAge());
+        tv4.setText("Overall: "
+                + categoryList.get(arg2).getOverall());
 
         Picasso.with(tou.getContext()).load(categoryList.get(arg2).getPhoto()).into(tou);
     }
