@@ -16,10 +16,12 @@ import au.com.bytecode.opencsv.CSVReader;
 public class PlayerReader {
     private InputStreamReader csvStreamReader;
     private PlayerData playerData;
+    private TeamData teamData;
 
-    public PlayerReader(InputStreamReader stream, PlayerData playerData) {
+    public PlayerReader(InputStreamReader stream, PlayerData playerData, TeamData teamData) {
         csvStreamReader = stream;
         this.playerData = playerData;
+        this.teamData = teamData;
     }
 
     public void read() {
@@ -50,5 +52,7 @@ public class PlayerReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        playerData.createIndexWithId();
+        playerData.createIndexWithTeam(teamData);
     }
 }

@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.fifa.FifaDataController;
 import com.fifa.PlayerData;
 import com.fifa.PlayerReader;
 import com.fifa.TeamData;
@@ -61,6 +62,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     private ArrayList<String> nameList = new ArrayList<String>();
 
     private PlayerData playerData;
+    private TeamData teamData;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -87,6 +89,9 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        playerData = new PlayerData();
+        teamData = new TeamData();
+
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -102,16 +107,33 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         List<String[]> list = new ArrayList<String[]>();
         String next[] = {};
         System.out.println("test!");
+
+        //read all data
+        try {
+            InputStreamReader playerStream = new InputStreamReader(getAssets().open(
+                            "PlayerPersonalData2.0.csv"
+            ));
+            InputStreamReader teamStream = new InputStreamReader(getAssets().open(
+                    "Team.csv"
+            ));
+            InputStreamReader teamAttrStream = new InputStreamReader(getAssets().open(
+                    "Team_Attributes.csv"
+            ));
+            FifaDataController f = new FifaDataController(playerData, teamData, playerStream, teamStream, teamAttrStream);
+            f.startReading();
+            System.out.println("asadd" + playerData.getPlayerList().get(0).toString());
+            System.out.println("asd" + teamData.getTeamList().get(0).toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        //
         try {
             InputStreamReader csvStreamReader = new InputStreamReader(
                     Main2Activity.this.getAssets().open(
                             "PlayerPersonalData2.0.csv"));
-            //mycode
-            PlayerReader test = new PlayerReader(csvStreamReader, new PlayerData());
-            test.read();
-            TeamReader test2 = new TeamReader(new InputStreamReader(this.getAssets().open("Team.csv")), new TeamData());
-            test2.read();
-            //mycode
+
             CSVReader reader = new CSVReader(csvStreamReader);
             for (;;) {
                 next = reader.readNext();

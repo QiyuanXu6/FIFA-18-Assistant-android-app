@@ -58,11 +58,11 @@ public class TeamReader {
                 Team t = teamData.getTeamById(id);
                 if (t != null) {
                     t.setDate(line[3]);
-                    t.setBuildUpPlaySpeed(Integer.parseInt(line[4]));
+                    t.setBuildUpPlaySpeed(line[4].length() == 0? 0:Integer.parseInt(line[4]));
                     t.setBuildUpPlaySpeedClass(line[5]);
-                    t.setBuildUpPlayDribbling(Integer.parseInt(line[6]));
+                    t.setBuildUpPlayDribbling(line[6].length() == 0? 0:Integer.parseInt(line[6]));
                     t.setBuildUpPlayDribblingClass(line[7]);
-                    t.setBuildUpPlayPassing(Integer.parseInt(line[8]));
+                    t.setBuildUpPlayPassing(line[8].length() == 0? 0:Integer.parseInt(line[8]));
                     t.setBuildUpPlayPassingClass(line[9]);
                 }
             }

@@ -37,6 +37,20 @@ public class TeamData {
     }
 
     public Team getTeamById(int id) {
+        if (!indexById.containsKey(id)) {
+            return null;
+        }
         return teamList.get(indexById.get(id));
+    }
+
+    public Team getTeamByName(String name) {
+        if (!indexByName.containsKey(name)) {
+            return null;
+        }
+        return teamList.get(indexByName.get(name));
+    }
+
+    public List<Team> getTeamList() {
+        return teamList;
     }
 }

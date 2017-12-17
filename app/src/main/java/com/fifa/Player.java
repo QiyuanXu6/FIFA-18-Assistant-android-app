@@ -35,6 +35,24 @@ public class Player {
         this.wage = wage;
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", photo='" + photo + '\'' +
+                ", nationality='" + nationality + '\'' +
+                ", flag='" + flag + '\'' +
+                ", overall=" + overall +
+                ", potential=" + potential +
+                ", club='" + club + '\'' +
+                ", clubLogo='" + clubLogo + '\'' +
+                ", value=" + value +
+                ", wage=" + wage +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
