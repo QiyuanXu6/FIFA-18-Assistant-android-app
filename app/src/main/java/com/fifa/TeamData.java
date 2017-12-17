@@ -122,13 +122,13 @@ public class TeamData {
      */
     public List<String> getTeamNameByPrefix(String pre) {
         List<Team> teams= getTeamsByPrefix(pre);
-        Set<Team> set = new HashSet<>(teams);
         List<String> res = new ArrayList<>();
-        for (Team t: set) {
+        for (Team t: teams) {
             res.add(t.getLongName());
         }
         return res;
     }
+
     /**
      * getter method for teamList object
      * @return list of team objects
@@ -137,11 +137,24 @@ public class TeamData {
         return teamList;
     }
 
+    /**
+     * get the name list of all teams
+     * @return
+     */
     public ArrayList<String> getNameList() {
         ArrayList<String> nameList = new ArrayList<>();
         for (Team t: teamList) {
             nameList.add(t.getLongName());
         }
         return nameList;
+    }
+
+    public String getTeamLogoWithId(PlayerData playerData, int id) {
+        Map<Integer, List<Player>> map = playerData.getTeamIndex();
+        if (!map.containsKey(id)) {
+            return "";
+        } else {
+            return map.get(id).get(0).getClubLogo();
+        }
     }
 }
