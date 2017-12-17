@@ -71,7 +71,6 @@ public class TeamData {
         prefixTree = new PrefixTree<>();
         for (int i = 0; i < teamList.size(); i++) {
             prefixTree.insert(teamList.get(i).getLongName(), teamList.get(i));
-            prefixTree.insert(teamList.get(i).getShortName(), teamList.get(i));
         }
     }
 
