@@ -160,7 +160,7 @@ public class TeamData {
         if (!map.containsKey(id)) {
             return "";
         } else {
-            return map.get(id).get(0).getClubLogo();
+            return map.get(id).get(0).getClubLogo();    //fetch fisrt guy's logo
         }
     }
 }

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +54,7 @@ import java.net.URL;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -183,6 +186,10 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         playerData = new PlayerData();
         teamData = new TeamData();
@@ -304,13 +311,23 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         resultTeams = (ArrayList) teamData.getTeamsByPrefix(input);
         resultTeamsNames = (ArrayList) teamData.getTeamNameByPrefix(input);
 
-        resultTeamView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,  resultTeamsNames));
+        //resultTeamView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,  resultTeamsNames));
+        List<HashMap<String,Object>> mListData = getListData(resultTeams);
+        SimpleAdapter adapter = new SimpleAdapter(this, mListData, R.layout.list_view_layout,
+                new String[]{"icon", "name"}, new int[]{R.id.photo, R.id.name});
 
-       /* Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
-        intent.putStringArrayListExtra("namelist", resultTeamsNames);
-        intent.putExtra("teamList", resultTeams);
-        startActivity(intent);*/
-
+        adapter.setViewBinder(new SimpleAdapter.ViewBinder() {
+            public boolean setViewValue(View view, Object data,
+                                        String textRepresentation) {
+                if(view instanceof ImageView  && data instanceof Bitmap){
+                    ImageView iv = (ImageView) view;
+                    iv.setImageBitmap((Bitmap) data);
+                    return true;
+                }else
+                    return false;
+            }
+        });
+        resultTeamView.setAdapter(adapter);
     }
 
     private ArrayList<String> getData(){
@@ -320,6 +337,35 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         data.add("测试数据3");
         data.add("测试数据4");
         return data;
+    }
+
+    public List<HashMap<String,Object>> getListData(ArrayList<Team> resultTeams){
+        List<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
+        HashMap<String,Object> map = null;
+        for(Team t: resultTeams){
+            map = new HashMap<String, Object>();
+            map.put("icon",getBitmap(teamData.getTeamLogoWithId(playerData, t.getApiId())));
+            map.put("name",t.getLongName());
+            list.add(map);
+        }
+        return list;
+    }
+
+    public Bitmap getBitmap(String photoUrl){
+        Bitmap mBitmap = null;
+        try {
+            URL url = new URL(photoUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            InputStream is = conn.getInputStream();
+            mBitmap = BitmapFactory.decodeStream(is);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return mBitmap;
     }
 
 }
