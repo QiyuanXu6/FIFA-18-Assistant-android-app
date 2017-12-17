@@ -148,4 +148,45 @@ public class Player {
     public void setWage(int wage) {
         this.wage = wage;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        if (id != player.id) return false;
+        if (age != player.age) return false;
+        if (overall != player.overall) return false;
+        if (potential != player.potential) return false;
+        if (value != player.value) return false;
+        if (wage != player.wage) return false;
+        if (name != null ? !name.equals(player.name) : player.name != null) return false;
+        if (photo != null ? !photo.equals(player.photo) : player.photo != null) return false;
+        if (nationality != null ? !nationality.equals(player.nationality) : player.nationality != null)
+            return false;
+        if (flag != null ? !flag.equals(player.flag) : player.flag != null) return false;
+        if (club != null ? !club.equals(player.club) : player.club != null) return false;
+        return clubLogo != null ? clubLogo.equals(player.clubLogo) : player.clubLogo == null;
+    }
+
+    /**
+     * This method reset a Player object, all integer numbers to -1, all string fields to empty String
+     */
+    public void resetPlayer() {
+        setAge(-1);
+        setClub("");
+        setClubLogo("");
+        setFlag("");
+        setFlag("");
+        setId(-1);
+        setName("");
+        setOverall(-1);
+        setPhoto("");
+        setPotential(-1);
+        setValue(-1);
+        setWage(-1);
+    }
+
 }
