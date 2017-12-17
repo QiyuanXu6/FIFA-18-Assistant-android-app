@@ -102,7 +102,7 @@ public class TeamData {
     /**
      * Use prefix tree to find a team list
      * @param pre prefix of the name
-     * @return list of target team
+     * @return list of target teams
      */
     public List<Team> getTeamsByPrefix(String pre) {
         return prefixTree.findPrefix(pre);
@@ -116,5 +116,11 @@ public class TeamData {
         return teamList;
     }
 
-
+    public ArrayList<String> getNameList() {
+        ArrayList<String> nameList = new ArrayList<>();
+        for (Team t: teamList) {
+            nameList.add(t.getLongName());
+        }
+        return nameList;
+    }
 }

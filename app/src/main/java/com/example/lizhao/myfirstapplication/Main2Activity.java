@@ -19,6 +19,7 @@ import android.widget.EditText;
 
 import android.widget.ImageView;
 
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,8 @@ import com.fifa.PlayerReader;
 import com.fifa.TeamData;
 import com.fifa.TeamReader;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -51,17 +54,20 @@ import au.com.bytecode.opencsv.CSVReader;
 public class Main2Activity extends AppCompatActivity implements OnItemSelectedListener{
 
     private TextView mTextMessage;
-    private Spinner spMainSelectCategory;
+    private Spinner playerSpinner;
     private Spinner idSpinner;
     private EditText inputID;
     private TextView tvMainSelectedCate;
     private TextView tv2;
     private TextView tv3;
     private TextView tv4;
+    private TextView tv5;
+    private TextView tv6;
+    private EditText teamInsert;
     private ImageView tou;
-
-    private ArrayList<Player> categoryList = new ArrayList<Player>();
-    private ArrayList<String> nameList = new ArrayList<String>();
+    private ImageView flag;
+    private ImageView clublogo;
+    private ListView listView;
 
     private PlayerData playerData;
     private TeamData teamData;
@@ -72,27 +78,86 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
+                /**
+                 *  When pressing home
+                 */
                 case R.id.navigation_home:
+                    teamInsert.setVisibility(View.INVISIBLE);
+                    tvMainSelectedCate.setVisibility(View.VISIBLE);
+                    tv2.setVisibility(View.VISIBLE);
+                    tv3.setVisibility(View.VISIBLE);
+                    tv4.setVisibility(View.VISIBLE);
+                    tv5.setVisibility(View.VISIBLE);
+                    tv6.setVisibility(View.VISIBLE);
+                    tou.setVisibility(View.VISIBLE);
+                    flag.setVisibility(View.VISIBLE);
+                    clublogo.setVisibility(View.VISIBLE);
                     mTextMessage.setText(R.string.title_home);
-                    tvMainSelectedCate.setText("Please select player");
-                    tv2.setText("");
-                    tv3.setText("");
-                    tv4.setText("");
-                    Picasso.with(tou.getContext()).load("https://cdn.pixabay.com/photo/2017/05/11/12/24/green-2304008_960_720.png").into(tou);
+                    playerSpinner.setVisibility(View.VISIBLE);
+                    int currentPos = playerSpinner.getSelectedItemPosition();
+                    tvMainSelectedCate.setText("Name: "
+                            + playerData.getPlayerList().get(currentPos).getName());
+                    tv2.setText("Country: "
+                            + playerData.getPlayerList().get(currentPos).getNationality());
+                    tv3.setText("Club: "
+                            + playerData.getPlayerList().get(currentPos).getClub());
+                    tv4.setText("Age: "
+                            + playerData.getPlayerList().get(currentPos).getAge());
+                    tv5.setText("Overall: "
+                            + playerData.getPlayerList().get(currentPos).getOverall());
+                    tv6.setText("Value: €"
+                            + playerData.getPlayerList().get(currentPos).getValue());
+                    Picasso.with(tou.getContext()).load(playerData.getPlayerList().get(currentPos).getPhoto()).into(tou);
+                    Picasso.with(flag.getContext()).load(playerData.getPlayerList().get(currentPos).getFlag()).into(flag);
+                    Picasso.with(clublogo.getContext()).load(playerData.getPlayerList().get(currentPos).getClubLogo()).into(clublogo);
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
-                    startActivity(intent);
-                    return true;
-                case R.id.navigation_notifications:
-                    //mTextMessage.setText(R.string.title_notifications);
-                    tvMainSelectedCate.setText("Group FIFA");
-                    tv2.setText("Zhao Li");
-                    tv3.setText("Qiyuan Xu");
-                    tv4.setText("Hai Cao");
-                    Picasso.with(tou.getContext()).load("https://www.techwikies.com/wp-content/uploads/2017/11/g12AAB9UDF9LVJZYdO6lPdLIop30Y93iIart6wwUcPvX2GC8BCMCFFRkKheZyc6BHf90w300.png").into(tou);
-                    return true;
+                    /**
+                     *  When pressing team
+                     */
+                    case R.id.navigation_dashboard:
+                        //Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
+                        //intent.putStringArrayListExtra("namelist", teamData.getNameList());
+                        //startActivity(intent);
+                        mTextMessage.setText("Search Team");
+                        teamInsert.setVisibility(View.VISIBLE);
+                        playerSpinner.setVisibility(View.INVISIBLE);
+                        tvMainSelectedCate.setVisibility(View.INVISIBLE);
+                        tv2.setVisibility(View.INVISIBLE);
+                        tv3.setVisibility(View.INVISIBLE);
+                        tv4.setVisibility(View.INVISIBLE);
+                        tv5.setVisibility(View.INVISIBLE);
+                        tv6.setVisibility(View.INVISIBLE);
+                        tou.setVisibility(View.INVISIBLE);
+                        flag.setVisibility(View.INVISIBLE);
+                        clublogo.setVisibility(View.INVISIBLE);
+                        return true;
+                    /**
+                     * When pressing About us
+                     */
+                    case R.id.navigation_notifications:
+                        //mTextMessage.setText(R.string.title_notifications);
+                        teamInsert.setVisibility(View.INVISIBLE);
+                        tvMainSelectedCate.setVisibility(View.VISIBLE);
+                        tv2.setVisibility(View.VISIBLE);
+                        tv3.setVisibility(View.VISIBLE);
+                        tv4.setVisibility(View.VISIBLE);
+                        tv5.setVisibility(View.VISIBLE);
+                        tv6.setVisibility(View.VISIBLE);
+                        tou.setVisibility(View.VISIBLE);
+                        flag.setVisibility(View.VISIBLE);
+                        clublogo.setVisibility(View.VISIBLE);
+                        mTextMessage.setText("About Us");
+                        playerSpinner.setVisibility(View.INVISIBLE);
+                        tvMainSelectedCate.setText("Zhao Li");
+                        tv2.setText("Qiyuan Xu");
+                        tv3.setText("Hai Cao");
+                        tv4.setText("");
+                        tv5.setText("");
+                        tv6.setText("");
+                        Picasso.with(tou.getContext()).load("http://n.sinaimg.cn/news/transform/20160811/EJcb-fxutsmv0315152.png").into(tou);
+                        Picasso.with(flag.getContext()).load("http://n.sinaimg.cn/news/transform/20160811/EJcb-fxutsmv0315152.png").into(flag);
+                        Picasso.with(clublogo.getContext()).load("http://n.sinaimg.cn/news/transform/20160811/EJcb-fxutsmv0315152.png").into(clublogo);
+                        return true;
             }
             return false;
         }
@@ -110,13 +175,21 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        spMainSelectCategory = (Spinner) findViewById(R.id.spMainSelectCategory);
+        playerSpinner = (Spinner) findViewById(R.id.playerSpinner);
         tvMainSelectedCate = (TextView) findViewById(R.id.tvMainSelectedCate);
         tv2 = (TextView) findViewById(R.id.tv2);
         tv3 = (TextView) findViewById(R.id.tv3);
         tv4 = (TextView) findViewById(R.id.tv4);
+        tv5 = (TextView) findViewById(R.id.tv5);
+        tv6 = (TextView) findViewById(R.id.tv6);
         tou = (ImageView) findViewById(R.id.tou);
-        //tou.setImageBitmap(returnBitMap("https://cdn.sofifa.org/48/18/players/20801.png"));
+        flag = (ImageView) findViewById(R.id.flag);
+        clublogo = (ImageView) findViewById(R.id.clublogo);
+        teamInsert = (EditText) findViewById(R.id.teamInsert);
+
+        /*listView = new ListView(this);
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,playerData.getNameList()));
+        setContentView(listView);*/
 
 
         List<String[]> list = new ArrayList<String[]>();
@@ -136,56 +209,39 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
             ));
             FifaDataController f = new FifaDataController(playerData, teamData, playerStream, teamStream, teamAttrStream);
             f.startReading();
-            System.out.println("asadd" + playerData.getPlayerList().get(0).toString());
+            System.out.println("asadd" + playerData.getPlayerList().get(0).getName());
             System.out.println("asd" + teamData.getTeamList().get(0).toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
-        //
-        try {
-            InputStreamReader csvStreamReader = new InputStreamReader(
-                    Main2Activity.this.getAssets().open(
-                            "PlayerPersonalData2.0.csv"));
-
-            CSVReader reader = new CSVReader(csvStreamReader);
-            for (;;) {
-                next = reader.readNext();
-                if (next != null) {
-                    list.add(next);
-                } else {
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for (int i = 0; i < list.size(); i++) {
-            categoryList.add(new Player(Integer.parseInt(list.get(i)[0]), list.get(i)[2], list.get(i)[5], Integer.parseInt(list.get(i)[3]), list.get(i)[4], Integer.parseInt(list.get(i)[7])));
-            nameList.add(list.get(i)[2]);
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, nameList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, playerData.getNameList());
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spMainSelectCategory.setAdapter(adapter);
-        spMainSelectCategory.setOnItemSelectedListener(this);
+        playerSpinner.setAdapter(adapter);
+        playerSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         tvMainSelectedCate.setText("Name: "
-                + categoryList.get(arg2).getName());
+                + playerData.getPlayerList().get(arg2).getName());
         tv2.setText("Country: "
-                + categoryList.get(arg2).getCountry());
-        tv3.setText("Age: "
-                + categoryList.get(arg2).getAge());
-        tv4.setText("Overall: "
-                + categoryList.get(arg2).getOverall());
+                + playerData.getPlayerList().get(arg2).getNationality());
+        tv3.setText("Club: "
+                + playerData.getPlayerList().get(arg2).getClub());
+        tv4.setText("Age: "
+                + playerData.getPlayerList().get(arg2).getAge());
+        tv5.setText("Overall: "
+                + playerData.getPlayerList().get(arg2).getOverall());
+        tv6.setText("Value: €"
+                + playerData.getPlayerList().get(arg2).getValue());
 
-        Picasso.with(tou.getContext()).load(categoryList.get(arg2).getPhoto()).into(tou);
+
+        Picasso.with(tou.getContext()).load(playerData.getPlayerList().get(arg2).getPhoto()).into(tou);
+        Picasso.with(flag.getContext()).load(playerData.getPlayerList().get(arg2).getFlag()).into(flag);
+        Picasso.with(clublogo.getContext()).load(playerData.getPlayerList().get(arg2).getClubLogo()).into(clublogo);
     }
 
 
@@ -194,6 +250,15 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
 
+    }
+
+    private ArrayList<String> getData(){
+        ArrayList<String> data = new ArrayList<String>();
+        data.add("测试数据1");
+        data.add("测试数据2");
+        data.add("测试数据3");
+        data.add("测试数据4");
+        return data;
     }
 
 }
