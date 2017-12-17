@@ -18,6 +18,7 @@ public class TeamData {
     //Hashmaps to increase query speed
     private Map<Integer, Team> indexById;
     private Map<String, Team> indexByName;
+    private PrefixTree<Team> prefixTree;
 
     /**
      * Constructor for this class
@@ -40,6 +41,7 @@ public class TeamData {
     public void createIndex() {
         createIndexById();
         createIndexByName();
+        createPrefixTree();
     }
 
     /**
@@ -59,6 +61,17 @@ public class TeamData {
         indexByName = new HashMap<>();
         for (int i = 0; i < teamList.size(); i++) {
             indexByName.put(String.valueOf(teamList.get(i).getLongName()), teamList.get(i));
+        }
+    }
+
+    /**
+     * Method to create a prefix tree based on team name to realize quick vague query of team name
+     */
+    private void createPrefixTree() {
+        prefixTree = new PrefixTree<>();
+        for (int i = 0; i < teamList.size(); i++) {
+            prefixTree.insert(teamList.get(i).getLongName(), teamList.get(i));
+            prefixTree.insert(teamList.get(i).getShortName(), teamList.get(i));
         }
     }
 
@@ -84,6 +97,15 @@ public class TeamData {
             return null;
         }
         return indexByName.get(name);
+    }
+
+    /**
+     * Use prefix tree to find a team list
+     * @param pre prefix of the name
+     * @return list of target teams
+     */
+    public List<Team> getTeamsByPrefix(String pre) {
+        return prefixTree.findPrefix(pre);
     }
 
     /**

@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.fifa.FifaDataController;
 import com.fifa.PlayerData;
 import com.fifa.PlayerReader;
+import com.fifa.Team;
 import com.fifa.TeamData;
 import com.fifa.TeamReader;
 import com.squareup.picasso.Picasso;
@@ -193,6 +194,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
 
 
 
+
         List<String[]> list = new ArrayList<String[]>();
         String next[] = {};
         System.out.println("test!");
@@ -255,9 +257,17 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
 
     public void searchTeam(View view) {
         // Do something in response to button
+        String input = teamInsert.getText().toString();
+        ArrayList<Team> resultTeams = new ArrayList<>();
+        resultTeams = (ArrayList) teamData.getTeamsByPrefix(input);
+        ArrayList<String> resultTeamsNames = new ArrayList<>();
+
+
         Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
-        intent.putStringArrayListExtra("namelist", teamData.getNameList());
+        intent.putStringArrayListExtra("namelist", resultTeamsNames);
+        intent.putExtra("teamList", resultTeams);
         startActivity(intent);
+
     }
 
     private ArrayList<String> getData(){

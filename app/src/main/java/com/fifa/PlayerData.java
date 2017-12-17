@@ -105,7 +105,7 @@ public class PlayerData {
     }
     /**
      * get a list of all names of players
-     * @return
+     * @return list of all names of players
      */
     public ArrayList<String> getNameList() {
         ArrayList<String> nameList = new ArrayList<>();
