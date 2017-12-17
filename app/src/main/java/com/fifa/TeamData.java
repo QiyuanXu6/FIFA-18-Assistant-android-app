@@ -50,7 +50,7 @@ public class TeamData {
     private void createIndexById() {
         indexById = new HashMap<>();
         for (int i = 0; i < teamList.size(); i++) {
-            indexById.put(teamList.get(i).getId(), teamList.get(i));
+            indexById.put(teamList.get(i).getApiId(), teamList.get(i));
         }
     }
 
