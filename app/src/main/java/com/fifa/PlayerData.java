@@ -87,8 +87,8 @@ public class PlayerData {
      * get a list of all names of players
      * @return
      */
-    public List<String> getNameList() {
-        List<String> nameList = new ArrayList<>();
+    public ArrayList<String> getNameList() {
+        ArrayList<String> nameList = new ArrayList<>();
         for (Player p: playerList) {
             nameList.add(p.getName());
         }

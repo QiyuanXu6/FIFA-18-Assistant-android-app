@@ -14,6 +14,7 @@
         android:layout_marginTop="16dp"
         android:text="Select The Player You Want to Know"
         android:textSize="20sp"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +33,7 @@
 
 
     <Spinner
-        android:id="@+id/spMainSelectCategory"
+        android:id="@+id/playerSpinner"
         android:layout_width="245dp"
         android:layout_height="42dp"
         android:layout_marginEnd="70dp"
@@ -50,7 +51,7 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spMainSelectCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/playerSpinner" />
 
     <TextView
         android:id="@+id/tv2"
@@ -85,24 +86,69 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv3" />
 
+    <TextView
+        android:id="@+id/tv5"
+        android:layout_width="245dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginTop="24dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv4" />
+
+    <TextView
+        android:id="@+id/tv6"
+        android:layout_width="245dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginTop="24dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv5" />
+
 
     <ImageView
         android:id="@+id/tou"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="14dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toStartOf="@+id/tvMainSelectedCate"
-        app:layout_constraintTop_toBottomOf="@+id/spMainSelectCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/playerSpinner" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/flag"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toStartOf="@+id/tv2"
         app:layout_constraintTop_toBottomOf="@+id/tou" />
+
+    <ImageView
+        android:id="@+id/clublogo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv3"
+        app:layout_constraintTop_toBottomOf="@+id/flag" />
+
+    <EditText
+        android:id="@+id/teamInsert"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Enter a team's name"
+        android:inputType="text|textPersonName"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -94,5 +94,11 @@ public class TeamData {
         return teamList;
     }
 
-
+    public ArrayList<String> getNameList() {
+        ArrayList<String> nameList = new ArrayList<>();
+        for (Team t: teamList) {
+            nameList.add(t.getLongName());
+        }
+        return nameList;
+    }
 }
