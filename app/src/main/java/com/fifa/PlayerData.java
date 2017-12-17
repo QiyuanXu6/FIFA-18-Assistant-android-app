@@ -43,7 +43,7 @@ public class PlayerData {
                 continue;
             } else {
                 if (!teamIndex.containsKey(team.getId())) {
-                    teamIndex.put(team.getId(), new ArrayList<>());
+                    teamIndex.put(team.getId(), new ArrayList<Player>());
                 }
                 teamIndex.get(team.getId()).add(playerList.get(i));
             }

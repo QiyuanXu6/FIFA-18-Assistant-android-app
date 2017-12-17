@@ -74,11 +74,16 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
-                    tvMainSelectedCate.setText("Please select player");
-                    tv2.setText("");
-                    tv3.setText("");
-                    tv4.setText("");
-                    Picasso.with(tou.getContext()).load("https://cdn.pixabay.com/photo/2017/05/11/12/24/green-2304008_960_720.png").into(tou);
+                    spMainSelectCategory.setVisibility(View.VISIBLE);
+                    tvMainSelectedCate.setText("Name: "
+                            + categoryList.get(spMainSelectCategory.getSelectedItemPosition()).getName());
+                    tv2.setText("Country: "
+                            + categoryList.get(spMainSelectCategory.getSelectedItemPosition()).getCountry());
+                    tv3.setText("Age: "
+                            + categoryList.get(spMainSelectCategory.getSelectedItemPosition()).getAge());
+                    tv4.setText("Overall: "
+                            + categoryList.get(spMainSelectCategory.getSelectedItemPosition()).getOverall());
+                    Picasso.with(tou.getContext()).load(categoryList.get(spMainSelectCategory.getSelectedItemPosition()).getPhoto()).into(tou);
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
@@ -87,6 +92,8 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                     return true;
                 case R.id.navigation_notifications:
                     //mTextMessage.setText(R.string.title_notifications);
+                    mTextMessage.setText("About Us");
+                    spMainSelectCategory.setVisibility(View.INVISIBLE);
                     tvMainSelectedCate.setText("Group FIFA");
                     tv2.setText("Zhao Li");
                     tv3.setText("Qiyuan Xu");
@@ -136,7 +143,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
             ));
             FifaDataController f = new FifaDataController(playerData, teamData, playerStream, teamStream, teamAttrStream);
             f.startReading();
-            System.out.println("asadd" + playerData.getPlayerList().get(0).toString());
+            System.out.println("asadd" + playerData.getPlayerList().get(0).getName());
             System.out.println("asd" + teamData.getTeamList().get(0).toString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,7 +151,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
 
 
         //
-        try {
+        /*try {
             InputStreamReader csvStreamReader = new InputStreamReader(
                     Main2Activity.this.getAssets().open(
                             "PlayerPersonalData2.0.csv"));
@@ -164,7 +171,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         for (int i = 0; i < list.size(); i++) {
             categoryList.add(new Player(Integer.parseInt(list.get(i)[0]), list.get(i)[2], list.get(i)[5], Integer.parseInt(list.get(i)[3]), list.get(i)[4], Integer.parseInt(list.get(i)[7])));
             nameList.add(list.get(i)[2]);
-        }
+        }*/
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, nameList);
 
@@ -177,15 +184,15 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         tvMainSelectedCate.setText("Name: "
-                + categoryList.get(arg2).getName());
+                + playerData.getPlayerList().get(arg2).getName());
         tv2.setText("Country: "
-                + categoryList.get(arg2).getCountry());
+                + playerData.getPlayerList().get(arg2).getNationality());
         tv3.setText("Age: "
-                + categoryList.get(arg2).getAge());
+                + playerData.getPlayerList().get(arg2).getAge());
         tv4.setText("Overall: "
-                + categoryList.get(arg2).getOverall());
+                + playerData.getPlayerList().get(arg2).getOverall());
 
-        Picasso.with(tou.getContext()).load(categoryList.get(arg2).getPhoto()).into(tou);
+        Picasso.with(tou.getContext()).load(playerData.getPlayerList().get(arg2).getPhoto()).into(tou);
     }
 
 
