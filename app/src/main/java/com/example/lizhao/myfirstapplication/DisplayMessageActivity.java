@@ -39,7 +39,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         TextView textView3 = (TextView) findViewById(R.id.textView3);
         textView3.setText(displayTeam.getBuildUpPlaySpeedClass());
 
-        ArrayList<Player> playersInTheTeam = new ArrayList<>();
+        ArrayList<Player> playersInTheTeam = (ArrayList<Player>) intent.getSerializableExtra("playersInTheTeam");
+
     }
 
 

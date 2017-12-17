@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 
 import com.fifa.FifaDataController;
+import com.fifa.Player;
 import com.fifa.PlayerData;
 import com.fifa.PlayerReader;
 import com.fifa.Team;
@@ -42,6 +43,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -238,8 +240,11 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Team seletedTeam = resultTeams.get(position);
+                ArrayList<Player> seletedTeamPlayers = (ArrayList) playerData.getTeamIndex().get(seletedTeam.getApiId());
+
                 Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
                 intent.putExtra("seletedTeam", seletedTeam);
+                intent.putExtra("c", seletedTeamPlayers);
                 startActivity(intent);
             }
         });
