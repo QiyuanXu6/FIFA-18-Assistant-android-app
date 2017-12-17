@@ -18,6 +18,7 @@ import java.util.List;
 public class DisplayMessageActivity extends AppCompatActivity {
     private ListView listView;
     private Team displayTeam;
+    private ListView resultPlayersView;
     private ArrayList<String> namelist;
     private ArrayList<Team> teamlist;
 
@@ -25,7 +26,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
-
+        resultPlayersView = findViewById(R.id.resultPlayersView);
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         //String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
@@ -39,8 +40,20 @@ public class DisplayMessageActivity extends AppCompatActivity {
         TextView textView3 = (TextView) findViewById(R.id.textView3);
         textView3.setText(displayTeam.getBuildUpPlaySpeedClass());
 
-        ArrayList<Player> playersInTheTeam = new ArrayList<>();
+        ArrayList<Player> playersInTheTeam = (ArrayList<Player>) intent.getSerializableExtra("playersInTheTeam");
+        namelist = getNames(playersInTheTeam);
+        resultPlayersView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,  namelist));
     }
 
+    public ArrayList<String> getNames(ArrayList<Player> input){
+        ArrayList<String> names = new ArrayList<>();
+        if (input == null){
+            return names;
+        }
+        for (Player p : input){
+            names.add(p.getName());
+        }
+        return names;
+    }
 
 }
