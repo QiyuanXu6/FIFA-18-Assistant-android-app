@@ -63,7 +63,7 @@ public class TeamReader {
                 if (line == null) {
                     break;
                 }
-                int id = Integer.parseInt(line[0]);
+                int id = Integer.parseInt(line[2]);
                 Team t = teamData.getTeamById(id);
                 if (t != null) {
                     t.setDate(line[3]);
