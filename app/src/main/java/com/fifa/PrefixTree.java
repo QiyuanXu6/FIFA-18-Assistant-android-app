@@ -18,12 +18,12 @@ public class PrefixTree<T> {
      * inner class Node represents Tree Node
      */
     private class Node {
-        private T obj;
+        private List<T> objs;
         private Map<Character, Node> children;
 
         @SuppressWarnings("unchecked")
-        public Node (T thing) {
-            this.obj = thing;
+        public Node () {
+            this.objs = new ArrayList<>();
             children = new HashMap<>(26);
         }
     }
@@ -32,7 +32,7 @@ public class PrefixTree<T> {
      * Constructor method for prefix tree;
      */
     public PrefixTree() {
-        this.root = new Node(null);
+        this.root = new Node();
     }
 
     /**
@@ -48,12 +48,12 @@ public class PrefixTree<T> {
                 if (cur.children.containsKey(c)) {
                     cur = cur.children.get(c);
                 } else {
-                    cur.children.put(c, new Node(null));
+                    cur.children.put(c, new Node());
                     cur = cur.children.get(c);
                 }
             }
         }
-        cur.obj = obj;
+        cur.objs.add(obj);
     }
 
     /**
@@ -86,8 +86,8 @@ public class PrefixTree<T> {
 
         if (cur == null) return;
 
-        if (cur.obj != null) {
-            res.add(cur.obj);
+        if (cur.objs.size() != 0) {
+            res.addAll(cur.objs);
         }
         for (Map.Entry<Character, Node> en: cur.children.entrySet()) {
             traversal(res, en.getValue());
