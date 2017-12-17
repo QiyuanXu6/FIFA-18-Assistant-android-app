@@ -173,9 +173,9 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                         tv4.setText("");
                         tv5.setText("");
                         tv6.setText("");
-                        Picasso.with(tou.getContext()).load("http://n.sinaimg.cn/news/transform/20160811/EJcb-fxutsmv0315152.png").into(tou);
-                        Picasso.with(flag.getContext()).load("http://n.sinaimg.cn/news/transform/20160811/EJcb-fxutsmv0315152.png").into(flag);
-                        Picasso.with(clublogo.getContext()).load("http://n.sinaimg.cn/news/transform/20160811/EJcb-fxutsmv0315152.png").into(clublogo);
+                        Picasso.with(tou.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(tou);
+                        Picasso.with(flag.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(flag);
+                        Picasso.with(clublogo.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(clublogo);
                         return true;
             }
             return false;
