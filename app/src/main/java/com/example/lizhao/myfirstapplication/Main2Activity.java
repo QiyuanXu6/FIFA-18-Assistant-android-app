@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import com.fifa.FifaDataController;
 import com.fifa.PlayerData;
 import com.fifa.PlayerReader;
+import com.fifa.Team;
 import com.fifa.TeamData;
 import com.fifa.TeamReader;
 import com.squareup.picasso.Picasso;
@@ -67,10 +69,15 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     private ImageView tou;
     private ImageView flag;
     private ImageView clublogo;
-    private ListView listView;
+    //private ListView listView;
+    private Button button;
+    private ListView resultTeamView;
 
     private PlayerData playerData;
     private TeamData teamData;
+    private ArrayList<Team> resultTeams;
+    private ArrayList<String> resultTeamsNames;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -82,6 +89,8 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                  *  When pressing home
                  */
                 case R.id.navigation_home:
+                    mTextMessage.setText(R.string.title_home);
+                    resultTeamView.setVisibility(View.INVISIBLE);
                     teamInsert.setVisibility(View.INVISIBLE);
                     tvMainSelectedCate.setVisibility(View.VISIBLE);
                     tv2.setVisibility(View.VISIBLE);
@@ -92,7 +101,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                     tou.setVisibility(View.VISIBLE);
                     flag.setVisibility(View.VISIBLE);
                     clublogo.setVisibility(View.VISIBLE);
-                    mTextMessage.setText(R.string.title_home);
+                    button.setVisibility(View.INVISIBLE);
                     playerSpinner.setVisibility(View.VISIBLE);
                     int currentPos = playerSpinner.getSelectedItemPosition();
                     tvMainSelectedCate.setText("Name: "
@@ -115,11 +124,11 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                      *  When pressing team
                      */
                     case R.id.navigation_dashboard:
-                        //Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
-                        //intent.putStringArrayListExtra("namelist", teamData.getNameList());
-                        //startActivity(intent);
+
                         mTextMessage.setText("Search Team");
                         teamInsert.setVisibility(View.VISIBLE);
+                        resultTeamView.setVisibility(View.VISIBLE);
+                        button.setVisibility(View.VISIBLE);
                         playerSpinner.setVisibility(View.INVISIBLE);
                         tvMainSelectedCate.setVisibility(View.INVISIBLE);
                         tv2.setVisibility(View.INVISIBLE);
@@ -130,12 +139,14 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                         tou.setVisibility(View.INVISIBLE);
                         flag.setVisibility(View.INVISIBLE);
                         clublogo.setVisibility(View.INVISIBLE);
+
                         return true;
                     /**
                      * When pressing About us
                      */
                     case R.id.navigation_notifications:
                         //mTextMessage.setText(R.string.title_notifications);
+                        resultTeamView.setVisibility(View.INVISIBLE);
                         teamInsert.setVisibility(View.INVISIBLE);
                         tvMainSelectedCate.setVisibility(View.VISIBLE);
                         tv2.setVisibility(View.VISIBLE);
@@ -148,6 +159,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                         clublogo.setVisibility(View.VISIBLE);
                         mTextMessage.setText("About Us");
                         playerSpinner.setVisibility(View.INVISIBLE);
+                        button.setVisibility(View.INVISIBLE);
                         tvMainSelectedCate.setText("Zhao Li");
                         tv2.setText("Qiyuan Xu");
                         tv3.setText("Hai Cao");
@@ -170,6 +182,8 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
 
         playerData = new PlayerData();
         teamData = new TeamData();
+        resultTeams = new ArrayList<>();
+        resultTeamsNames = new ArrayList<>();
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -186,10 +200,8 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         flag = (ImageView) findViewById(R.id.flag);
         clublogo = (ImageView) findViewById(R.id.clublogo);
         teamInsert = (EditText) findViewById(R.id.teamInsert);
-
-        /*listView = new ListView(this);
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,playerData.getNameList()));
-        setContentView(listView);*/
+        button = (Button) findViewById(R.id.button);
+        resultTeamView = findViewById(R.id.resultTeamView);
 
 
         List<String[]> list = new ArrayList<String[]>();
@@ -216,11 +228,22 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, playerData.getNameList());
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         playerSpinner.setAdapter(adapter);
         playerSpinner.setOnItemSelectedListener(this);
+
+        resultTeamView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Team seletedTeam = resultTeams.get(position);
+                Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
+                intent.putExtra("seletedTeam", seletedTeam);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -249,6 +272,22 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
+
+    }
+
+    public void searchTeam(View view) {
+        // Do something in response to button
+        String input = teamInsert.getText().toString();
+
+        resultTeams = (ArrayList) teamData.getTeamsByPrefix(input);
+        resultTeamsNames = (ArrayList) teamData.getTeamNameByPrefix(input);
+
+        resultTeamView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,  resultTeamsNames));
+
+       /* Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
+        intent.putStringArrayListExtra("namelist", resultTeamsNames);
+        intent.putExtra("teamList", resultTeams);
+        startActivity(intent);*/
 
     }
 

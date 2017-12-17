@@ -1,11 +1,13 @@
 package com.fifa;
 
+import java.io.Serializable;
+
 /**
  * Created by qiyuanxu on 12/16/17.
  * This class is created to hold a team object.
  */
 
-public class Team {
+public class Team implements Serializable {
     //Team attributes
     private int id;
     private int apiId;
