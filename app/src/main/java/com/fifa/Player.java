@@ -179,7 +179,7 @@ public class Player {
         setClub("");
         setClubLogo("");
         setFlag("");
-        setFlag("");
+        setNationality("");
         setId(-1);
         setName("");
         setOverall(-1);
