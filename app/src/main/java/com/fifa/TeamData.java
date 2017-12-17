@@ -2,8 +2,10 @@ package com.fifa;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by qiyuanxu on 12/16/17.
@@ -65,12 +67,15 @@ public class TeamData {
     }
 
     /**
-     * Method to create a prefix tree based on team name to realize quick vague query of team name
+     * Method to create a prefix tree based on team name wrods to realize quick vague query of team name
      */
     private void createPrefixTree() {
         prefixTree = new PrefixTree<>();
         for (int i = 0; i < teamList.size(); i++) {
-            prefixTree.insert(teamList.get(i).getLongName(), teamList.get(i));
+            String[] words = teamList.get(i).getLongName().split(" ");
+            for (String word: words) {
+                prefixTree.insert(word, teamList.get(i));
+            }
         }
     }
 
@@ -104,7 +109,10 @@ public class TeamData {
      * @return list of target teams
      */
     public List<Team> getTeamsByPrefix(String pre) {
-        return prefixTree.findPrefix(pre);
+        List<Team> teams= prefixTree.findPrefix(pre);
+        Set<Team> set = new HashSet<>(teams);
+        List<Team> res = new ArrayList<>(set);
+        return res;
     }
 
     /**
@@ -114,8 +122,9 @@ public class TeamData {
      */
     public List<String> getTeamNameByPrefix(String pre) {
         List<Team> teams= getTeamsByPrefix(pre);
+        Set<Team> set = new HashSet<>(teams);
         List<String> res = new ArrayList<>();
-        for (Team t: teams) {
+        for (Team t: set) {
             res.add(t.getLongName());
         }
         return res;
