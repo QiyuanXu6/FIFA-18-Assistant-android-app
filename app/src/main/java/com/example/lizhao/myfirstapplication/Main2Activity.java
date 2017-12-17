@@ -240,11 +240,13 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Team seletedTeam = resultTeams.get(position);
+                System.out.println("codecode " + seletedTeam.getApiId());
                 ArrayList<Player> seletedTeamPlayers = (ArrayList) playerData.getTeamIndex().get(seletedTeam.getApiId());
+                //System.out.println("coding " + seletedTeamPlayers.get(0).toString());
 
                 Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
                 intent.putExtra("seletedTeam", seletedTeam);
-                intent.putExtra("c", seletedTeamPlayers);
+                intent.putExtra("playersInTheTeam", seletedTeamPlayers);
                 startActivity(intent);
             }
         });

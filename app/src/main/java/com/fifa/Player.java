@@ -1,11 +1,13 @@
 package com.fifa;
 
+import java.io.Serializable;
+
 /**
  * Created by qiyuanxu on 12/16/17.
  * This class is created to hold values of one single player.
  */
 
-public class Player {
+public class Player implements Serializable {
 
     //Attributes of players
     private int id;
