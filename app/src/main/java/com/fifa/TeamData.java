@@ -109,6 +109,19 @@ public class TeamData {
     }
 
     /**
+     * User prefix tree to get all team names
+     * @param pre prefix of the team long or short name
+     * @return list of team full names
+     */
+    public List<String> getTeamNameByPrefix(String pre) {
+        List<Team> teams= getTeamsByPrefix(pre);
+        List<String> res = new ArrayList<>();
+        for (Team t: teams) {
+            res.add(t.getLongName());
+        }
+        return res;
+    }
+    /**
      * getter method for teamList object
      * @return list of team objects
      */
