@@ -7,26 +7,46 @@ import java.util.Map;
 
 /**
  * Created by qiyuanxu on 12/16/17.
+ * This is a class to manage all players data create indexes for quick query
  */
 
 public class PlayerData {
+
+    //playerList holds all Player objects in the order of reading
     private List<Player> playerList;
+
+    //indexes are hash maps to improve query efficiency
     private Map<Integer, Player> idIndex;
     private Map<Integer, List<Player>> teamIndex;
 
+    /**
+     * Constructor method
+     */
     public PlayerData() {
         playerList = new ArrayList<>();
     }
 
+    /**
+     * Method to add a new player into this dataset.
+     * No duplication in CSV file after data cleaning.
+     * @param player new Player object to be added in.
+     */
     public void add(Player player) {
         playerList.add(player);
     }
 
+    /**
+     * This method is created to create all hash maps to accelerate data querying.
+     * @param teamData
+     */
     public void createIndex(TeamData teamData) {
         createIndexWithId();
         createIndexWithTeam(teamData);
     }
 
+    /**
+     * This method is built to create a hashmap of id with Player object.
+     */
     private void createIndexWithId() {
         idIndex = new HashMap<>();
         for (int i = 0; i < playerList.size(); i++) {
@@ -34,6 +54,11 @@ public class PlayerData {
         }
     }
 
+    /**
+     * This method is built to create a hashmap of team id with list of a player objects who are
+     * in this team
+     * @param teamData
+     */
     private void createIndexWithTeam(TeamData teamData) {
         teamIndex = new HashMap<>();
         for (int i = 0; i < playerList.size(); i++) {
@@ -43,14 +68,17 @@ public class PlayerData {
                 continue;
             } else {
                 if (!teamIndex.containsKey(team.getId())) {
-                    teamIndex.put(team.getId(), new ArrayList<>());
+                    teamIndex.put(team.getId(), new ArrayList<Player>());
                 }
                 teamIndex.get(team.getId()).add(playerList.get(i));
             }
         }
     }
 
-
+    /**
+     * Getter for playerList
+     * @return List of players
+     */
     public List<Player> getPlayerList() {
         return playerList;
     }

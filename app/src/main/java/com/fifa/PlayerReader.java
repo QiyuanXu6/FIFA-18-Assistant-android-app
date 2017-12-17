@@ -13,16 +13,29 @@ import au.com.bytecode.opencsv.CSVReader;
  */
 
 public class PlayerReader {
+
+    //Data Stream variable
     private InputStreamReader csvStreamReader;
+
+    //playerData object and teamData object to be used in data reading.
     private PlayerData playerData;
     private TeamData teamData;
 
+    /**
+     * Constructor method
+     * @param stream input stream for player data
+     * @param playerData playerData where the data will be written in.
+     * @param teamData teamData to be used to create index for playerData.
+     */
     public PlayerReader(InputStreamReader stream, PlayerData playerData, TeamData teamData) {
         csvStreamReader = stream;
         this.playerData = playerData;
         this.teamData = teamData;
     }
 
+    /**
+     * Method to read input streams
+     */
     public void read() {
         CSVReader reader = new CSVReader(csvStreamReader);
         String[] line;

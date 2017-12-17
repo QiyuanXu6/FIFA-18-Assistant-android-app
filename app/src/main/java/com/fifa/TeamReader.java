@@ -7,6 +7,7 @@ import au.com.bytecode.opencsv.CSVReader;
 
 /**
  * Created by qiyuanxu on 12/16/17.
+ * This class is create to read team data into TeamData object
  */
 
 public class TeamReader {
@@ -14,12 +15,21 @@ public class TeamReader {
     private InputStreamReader teamAttrStream;
     private TeamData teamData;
 
+    /**
+     * Constructor for this class
+     * @param teamStream input stream for team
+     * @param teamAttrStream input stream for team attributes
+     * @param teamData data manager where we want to write data in.
+     */
     public TeamReader(InputStreamReader teamStream, InputStreamReader teamAttrStream, TeamData teamData) {
         this.teamStream = teamStream;
         this.teamAttrStream = teamAttrStream;
         this.teamData = teamData;
     }
 
+    /**
+     * Method to read input streams
+     */
     public void read() {
         CSVReader reader = new CSVReader(teamStream);
         String[] line;
