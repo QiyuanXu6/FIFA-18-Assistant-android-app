@@ -83,6 +83,26 @@ public class PlayerData {
         return playerList;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PlayerData that = (PlayerData) o;
+
+        if (playerList != null ? !playerList.equals(that.playerList) : that.playerList != null)
+            return false;
+        if (idIndex != null ? !idIndex.equals(that.idIndex) : that.idIndex != null) return false;
+        return teamIndex != null ? teamIndex.equals(that.teamIndex) : that.teamIndex == null;
+    }
+
+    public Map<Integer, Player> getIdIndex() {
+        return idIndex;
+    }
+
+    public Map<Integer, List<Player>> getTeamIndex() {
+        return teamIndex;
+    }
     /**
      * get a list of all names of players
      * @return
