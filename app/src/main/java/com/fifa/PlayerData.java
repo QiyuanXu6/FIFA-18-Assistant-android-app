@@ -85,7 +85,7 @@ public class PlayerData {
 
     /**
      * get a list of all names of players
-     * @return
+     * @return list of all names of players
      */
     public List<String> getNameList() {
         List<String> nameList = new ArrayList<>();
