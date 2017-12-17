@@ -149,6 +149,12 @@ public class TeamData {
         return nameList;
     }
 
+    /**
+     * get team logo with team api id and player data
+     * @param playerData dataset contains all data
+     * @param id api id of target team
+     * @return url address of team logo or empty string if the team logo is not found
+     */
     public String getTeamLogoWithId(PlayerData playerData, int id) {
         Map<Integer, List<Player>> map = playerData.getTeamIndex();
         if (!map.containsKey(id)) {
