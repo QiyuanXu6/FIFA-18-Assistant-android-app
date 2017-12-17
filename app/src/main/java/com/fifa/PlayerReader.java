@@ -2,8 +2,7 @@ package com.fifa;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -52,7 +51,6 @@ public class PlayerReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        playerData.createIndexWithId();
-        playerData.createIndexWithTeam(teamData);
+        playerData.createIndex(teamData);
     }
 }

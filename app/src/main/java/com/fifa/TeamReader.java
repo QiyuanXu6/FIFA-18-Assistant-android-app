@@ -42,8 +42,7 @@ public class TeamReader {
             e.printStackTrace();
         }
 
-        teamData.createIndexByName();
-        teamData.createIndexById();
+        teamData.createIndex();
 
         reader = new CSVReader(teamAttrStream);
 
