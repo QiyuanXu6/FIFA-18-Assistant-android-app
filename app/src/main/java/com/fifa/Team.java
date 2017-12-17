@@ -29,18 +29,18 @@ public class Team {
     @Override
     public String toString() {
         return "Team{" +
-                "id=" + id +
-                ", apiId=" + apiId +
-                ", fifaId=" + fifaId +
-                ", longName='" + longName + '\'' +
-                ", shortName='" + shortName + '\'' +
-                ", date='" + date + '\'' +
-                ", buildUpPlaySpeed=" + buildUpPlaySpeed +
-                ", buildUpPlaySpeedClass='" + buildUpPlaySpeedClass + '\'' +
-                ", buildUpPlayDribbling=" + buildUpPlayDribbling +
-                ", buildUpPlayDribblingClass='" + buildUpPlayDribblingClass + '\'' +
-                ", buildUpPlayPassing=" + buildUpPlayPassing +
-                ", buildUpPlayPassingClass='" + buildUpPlayPassingClass + '\'' +
+                "id=" + getId() +
+                ", apiId=" + getApiId() +
+                ", fifaId=" + getFifaId() +
+                ", longName='" + getLongName() + '\'' +
+                ", shortName='" + getShortName() + '\'' +
+                ", date='" + getDate() + '\'' +
+                ", buildUpPlaySpeed=" + getBuildUpPlaySpeed() +
+                ", buildUpPlaySpeedClass='" + getBuildUpPlaySpeedClass() + '\'' +
+                ", buildUpPlayDribbling=" + getBuildUpPlayDribbling() +
+                ", buildUpPlayDribblingClass='" + getBuildUpPlayDribblingClass() + '\'' +
+                ", buildUpPlayPassing=" + getBuildUpPlayPassing() +
+                ", buildUpPlayPassingClass='" + getBuildUpPlayPassingClass() + '\'' +
                 '}';
     }
 
@@ -139,4 +139,45 @@ public class Team {
     public void setBuildUpPlayPassingClass(String buildUpPlayPassingClass) {
         this.buildUpPlayPassingClass = buildUpPlayPassingClass;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Team team = (Team) o;
+
+        if (id != team.id) return false;
+        if (apiId != team.apiId) return false;
+        if (fifaId != team.fifaId) return false;
+        if (buildUpPlaySpeed != team.buildUpPlaySpeed) return false;
+        if (buildUpPlayDribbling != team.buildUpPlayDribbling) return false;
+        if (buildUpPlayPassing != team.buildUpPlayPassing) return false;
+        if (longName != null ? !longName.equals(team.longName) : team.longName != null)
+            return false;
+        if (shortName != null ? !shortName.equals(team.shortName) : team.shortName != null)
+            return false;
+        if (date != null ? !date.equals(team.date) : team.date != null) return false;
+        if (buildUpPlaySpeedClass != null ? !buildUpPlaySpeedClass.equals(team.buildUpPlaySpeedClass) : team.buildUpPlaySpeedClass != null)
+            return false;
+        if (buildUpPlayDribblingClass != null ? !buildUpPlayDribblingClass.equals(team.buildUpPlayDribblingClass) : team.buildUpPlayDribblingClass != null)
+            return false;
+        return buildUpPlayPassingClass != null ? buildUpPlayPassingClass.equals(team.buildUpPlayPassingClass) : team.buildUpPlayPassingClass == null;
+    }
+
+    public void resetTeam() {
+        setApiId(-1);
+        setLongName("");
+        setShortName("");
+        setId(-1);
+        setFifaId(-1);
+        setDate(null);
+        setBuildUpPlayDribblingClass(null);
+        setBuildUpPlaySpeedClass(null);
+        setBuildUpPlayPassingClass(null);
+        setBuildUpPlayDribbling(0);
+        setBuildUpPlaySpeed(0);
+        setBuildUpPlayPassing(0);
+    }
+
 }
