@@ -67,10 +67,10 @@ public class PlayerData {
             if (team == null) {
                 continue;
             } else {
-                if (!teamIndex.containsKey(team.getId())) {
-                    teamIndex.put(team.getId(), new ArrayList<Player>());
+                if (!teamIndex.containsKey(team.getApiId())) {
+                    teamIndex.put(team.getApiId(), new ArrayList<Player>());
                 }
-                teamIndex.get(team.getId()).add(playerList.get(i));
+                teamIndex.get(team.getApiId()).add(playerList.get(i));
             }
         }
     }
