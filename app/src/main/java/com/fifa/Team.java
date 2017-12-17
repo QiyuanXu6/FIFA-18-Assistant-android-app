@@ -185,6 +185,9 @@ public class Team implements Serializable {
         return buildUpPlayPassingClass != null ? buildUpPlayPassingClass.equals(team.buildUpPlayPassingClass) : team.buildUpPlayPassingClass == null;
     }
 
+    /**
+     * This method reset a Team object.
+     */
     public void resetTeam() {
         setApiId(-1);
         setLongName("");
