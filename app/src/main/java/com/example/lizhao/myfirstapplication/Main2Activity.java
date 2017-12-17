@@ -10,8 +10,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -55,7 +57,7 @@ import java.util.List;
 import au.com.bytecode.opencsv.CSVReader;
 
 
-public class Main2Activity extends AppCompatActivity implements OnItemSelectedListener{
+public class Main2Activity extends AppCompatActivity implements OnItemSelectedListener {
 
     private TextView mTextMessage;
     private Spinner playerSpinner;
@@ -250,6 +252,16 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                 startActivity(intent);
             }
         });
+        teamInsert.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    searchTeam(findViewById(android.R.id.content));
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -284,6 +296,9 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
 
     public void searchTeam(View view) {
         // Do something in response to button
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+
         String input = teamInsert.getText().toString();
 
         resultTeams = (ArrayList) teamData.getTeamsByPrefix(input);

@@ -145,6 +145,8 @@
         android:hint="Enter a team's name"
         android:inputType="text|textPersonName"
         android:visibility="invisible"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
