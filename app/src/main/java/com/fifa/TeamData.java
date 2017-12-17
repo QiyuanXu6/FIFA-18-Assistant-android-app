@@ -110,9 +110,9 @@ public class TeamData {
      */
     public List<Team> getTeamsByPrefix(String pre) {
         List<Team> teams= prefixTree.findPrefix(pre);
-        Set<Team> set = new HashSet<>(teams);
-        List<Team> res = new ArrayList<>(set);
-        return res;
+        //Set<Team> set = new HashSet<>(teams);
+       // List<Team> res = new ArrayList<>(set);
+        return teams;
     }
 
     /**
@@ -122,9 +122,9 @@ public class TeamData {
      */
     public List<String> getTeamNameByPrefix(String pre) {
         List<Team> teams= getTeamsByPrefix(pre);
-        Set<Team> set = new HashSet<>(teams);
+        //Set<Team> set = new HashSet<>(teams);
         List<String> res = new ArrayList<>();
-        for (Team t: set) {
+        for (Team t: teams) {
             res.add(t.getLongName());
         }
         return res;
