@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class TeamData {
     private List<Team> teamList;
-    private Map<Integer, Integer> indexById;
-    private Map<String, Integer> indexByName;
+    private Map<Integer, Team> indexById;
+    private Map<String, Team> indexByName;
 
     public TeamData() {
         this.teamList = new ArrayList<>();
@@ -22,17 +22,22 @@ public class TeamData {
         teamList.add(t);
     }
 
-    public void createIndexById() {
+    public void createIndex() {
+        createIndexById();
+        createIndexByName();
+    }
+
+    private void createIndexById() {
         indexById = new HashMap<>();
         for (int i = 0; i < teamList.size(); i++) {
-            indexById.put(teamList.get(i).getId(), i);
+            indexById.put(teamList.get(i).getId(), teamList.get(i));
         }
     }
 
-    public void createIndexByName() {
+    private void createIndexByName() {
         indexByName = new HashMap<>();
         for (int i = 0; i < teamList.size(); i++) {
-            indexByName.put(String.valueOf(teamList.get(i).getLongName()), i);
+            indexByName.put(String.valueOf(teamList.get(i).getLongName()), teamList.get(i));
         }
     }
 
@@ -40,14 +45,14 @@ public class TeamData {
         if (!indexById.containsKey(id)) {
             return null;
         }
-        return teamList.get(indexById.get(id));
+        return indexById.get(id);
     }
 
     public Team getTeamByName(String name) {
         if (!indexByName.containsKey(name)) {
             return null;
         }
-        return teamList.get(indexByName.get(name));
+        return indexByName.get(name);
     }
 
     public List<Team> getTeamList() {

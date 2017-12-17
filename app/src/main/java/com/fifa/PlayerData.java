@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class PlayerData {
     private List<Player> playerList;
-    private Map<Integer, Integer> idIndex;
-    private Map<Integer, List<Integer>> teamIndex;
+    private Map<Integer, Player> idIndex;
+    private Map<Integer, List<Player>> teamIndex;
 
     public PlayerData() {
         playerList = new ArrayList<>();
@@ -22,14 +22,19 @@ public class PlayerData {
         playerList.add(player);
     }
 
-    public void createIndexWithId() {
+    public void createIndex(TeamData teamData) {
+        createIndexWithId();
+        createIndexWithTeam(teamData);
+    }
+
+    private void createIndexWithId() {
         idIndex = new HashMap<>();
         for (int i = 0; i < playerList.size(); i++) {
-            idIndex.put(playerList.get(i).getId(), i);
+            idIndex.put(playerList.get(i).getId(), playerList.get(i));
         }
     }
 
-    public void createIndexWithTeam(TeamData teamData) {
+    private void createIndexWithTeam(TeamData teamData) {
         teamIndex = new HashMap<>();
         for (int i = 0; i < playerList.size(); i++) {
             String club = String.valueOf(playerList.get(i).getClub());
@@ -38,9 +43,9 @@ public class PlayerData {
                 continue;
             } else {
                 if (!teamIndex.containsKey(team.getId())) {
-                    teamIndex.put(team.getId(), new ArrayList<Integer>());
+                    teamIndex.put(team.getId(), new ArrayList<>());
                 }
-                teamIndex.get(team.getId()).add(playerList.get(i).getId());
+                teamIndex.get(team.getId()).add(playerList.get(i));
             }
         }
     }
