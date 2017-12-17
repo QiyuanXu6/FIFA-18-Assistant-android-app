@@ -1,0 +1,39 @@
+package com.fifa;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by qiyuanxu on 12/16/17.
+ */
+
+public class PlayerData {
+    private List<Player> playerList;
+    private Map<Integer, Integer> idIndex;
+    private Map<Integer, List<Integer>> teamIndex;
+
+    public PlayerData() {
+        playerList = new ArrayList<>();
+    }
+
+    public void add(Player player) {
+        playerList.add(player);
+    }
+
+    public void createIndexWithId() {
+        idIndex = new HashMap<>();
+        for (int i = 0; i < playerList.size(); i++) {
+            idIndex.put(playerList.get(i).getId(), i);
+        }
+    }
+
+    public void createIndexWithTeam(TeamData teamData) {
+        teamIndex = new HashMap<>();
+        for (int i = 0; i < playerList.size(); i++) {
+            teamIndex.put(String.valueOf(playerList.get(i).getClub()))
+        }
+    }
+
+}

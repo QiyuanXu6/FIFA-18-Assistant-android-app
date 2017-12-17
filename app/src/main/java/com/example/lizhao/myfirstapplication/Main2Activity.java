@@ -23,6 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.fifa.PlayerData;
+import com.fifa.PlayerReader;
+import com.fifa.TeamData;
+import com.fifa.TeamReader;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedInputStream;
@@ -55,6 +59,8 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
 
     private ArrayList<Player> categoryList = new ArrayList<Player>();
     private ArrayList<String> nameList = new ArrayList<String>();
+
+    private PlayerData playerData;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -95,11 +101,17 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
 
         List<String[]> list = new ArrayList<String[]>();
         String next[] = {};
+        System.out.println("test!");
         try {
             InputStreamReader csvStreamReader = new InputStreamReader(
                     Main2Activity.this.getAssets().open(
                             "PlayerPersonalData2.0.csv"));
-
+            //mycode
+            PlayerReader test = new PlayerReader(csvStreamReader, new PlayerData());
+            test.read();
+            TeamReader test2 = new TeamReader(new InputStreamReader(this.getAssets().open("Team.csv")), new TeamData());
+            test2.read();
+            //mycode
             CSVReader reader = new CSVReader(csvStreamReader);
             for (;;) {
                 next = reader.readNext();
