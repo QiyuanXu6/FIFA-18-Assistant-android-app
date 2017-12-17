@@ -7,6 +7,7 @@ package com.fifa;
 
 public class Player {
 
+    //Attributes of players
     private int id;
     private String name;
     private int age;
@@ -20,6 +21,21 @@ public class Player {
     private int value;
     private int wage;
 
+    /**
+     * Constructor method to pass attributes in
+     * @param id id number of player
+     * @param name name of the player
+     * @param age age of the player
+     * @param photo photo URL of the player
+     * @param nationality nationality of the player
+     * @param flag flag picture URL of the nationality
+     * @param overall overall score of the player, full score is 100
+     * @param potential potential score of the player
+     * @param club club name of the player
+     * @param clubLogo club logo URL of the player
+     * @param value player's estimate price
+     * @param wage player's wage in year
+     */
     public Player(int id, String name, int age, String photo, String nationality, String flag, int overall, int potential, String club, String clubLogo, int value, int wage) {
         this.id = id;
         this.name = name;
@@ -35,6 +51,10 @@ public class Player {
         this.wage = wage;
     }
 
+    /**
+     * This method is to produce a string of this player attributes
+     * @return a string of attributes of player
+     */
     @Override
     public String toString() {
         return "Player{" +
@@ -53,6 +73,10 @@ public class Player {
                 '}';
     }
 
+    /**
+     *
+     * Get and set method for private attributes
+     */
     public int getId() {
         return id;
     }
@@ -148,4 +172,45 @@ public class Player {
     public void setWage(int wage) {
         this.wage = wage;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        if (id != player.id) return false;
+        if (age != player.age) return false;
+        if (overall != player.overall) return false;
+        if (potential != player.potential) return false;
+        if (value != player.value) return false;
+        if (wage != player.wage) return false;
+        if (name != null ? !name.equals(player.name) : player.name != null) return false;
+        if (photo != null ? !photo.equals(player.photo) : player.photo != null) return false;
+        if (nationality != null ? !nationality.equals(player.nationality) : player.nationality != null)
+            return false;
+        if (flag != null ? !flag.equals(player.flag) : player.flag != null) return false;
+        if (club != null ? !club.equals(player.club) : player.club != null) return false;
+        return clubLogo != null ? clubLogo.equals(player.clubLogo) : player.clubLogo == null;
+    }
+
+    /**
+     * This method reset a Player object, all integer numbers to -1, all string fields to empty String
+     */
+    public void resetPlayer() {
+        setAge(-1);
+        setClub("");
+        setClubLogo("");
+        setFlag("");
+        setNationality("");
+        setId(-1);
+        setName("");
+        setOverall(-1);
+        setPhoto("");
+        setPotential(-1);
+        setValue(-1);
+        setWage(-1);
+    }
+
 }

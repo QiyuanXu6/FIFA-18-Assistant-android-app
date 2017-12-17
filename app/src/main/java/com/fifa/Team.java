@@ -2,9 +2,11 @@ package com.fifa;
 
 /**
  * Created by qiyuanxu on 12/16/17.
+ * This class is created to hold a team object.
  */
 
 public class Team {
+    //Team attributes
     private int id;
     private int apiId;
     private int fifaId;
@@ -18,6 +20,14 @@ public class Team {
     private int buildUpPlayPassing;
     private String buildUpPlayPassingClass;
 
+    /**
+     * Constructor for this class
+     * @param id id number of the team
+     * @param apiId api id number of the team
+     * @param fifaId fifa id of the team
+     * @param longName long name of the team
+     * @param shortName short name of the team
+     */
     public Team(int id, int apiId, int fifaId, String longName, String shortName) {
         this.id = id;
         this.apiId = apiId;
@@ -26,6 +36,10 @@ public class Team {
         this.shortName = shortName;
     }
 
+    /**
+     * A method to produce a string to describe this team
+     * @return a string of different attributes of the team.
+     */
     @Override
     public String toString() {
         return "Team{" +
@@ -44,6 +58,10 @@ public class Team {
                 '}';
     }
 
+
+    /**
+     * getter and setter for instance variables
+     */
     public int getId() {
         return id;
     }
