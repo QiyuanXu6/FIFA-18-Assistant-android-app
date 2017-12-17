@@ -38,18 +38,18 @@ public class Player {
     @Override
     public String toString() {
         return "Player{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", photo='" + photo + '\'' +
-                ", nationality='" + nationality + '\'' +
-                ", flag='" + flag + '\'' +
-                ", overall=" + overall +
-                ", potential=" + potential +
-                ", club='" + club + '\'' +
-                ", clubLogo='" + clubLogo + '\'' +
-                ", value=" + value +
-                ", wage=" + wage +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", age=" + getAge() +
+                ", photo='" + getPhoto() + '\'' +
+                ", nationality='" + getNationality() + '\'' +
+                ", flag='" + getFlag() + '\'' +
+                ", overall=" + getOverall() +
+                ", potential=" + getPotential() +
+                ", club='" + getClub() + '\'' +
+                ", clubLogo='" + getClubLogo() + '\'' +
+                ", value=" + getValue() +
+                ", wage=" + getWage() +
                 '}';
     }
 
