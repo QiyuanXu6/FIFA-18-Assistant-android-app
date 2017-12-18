@@ -4,13 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,56 +25,41 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.fifa.FifaDataController;
 import com.fifa.Player;
 import com.fifa.PlayerData;
-import com.fifa.PlayerReader;
 import com.fifa.Team;
 import com.fifa.TeamData;
-import com.fifa.TeamReader;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import au.com.bytecode.opencsv.CSVReader;
-
-
+/**
+ * The Main Activity for this App
+ */
 public class Main2Activity extends AppCompatActivity implements OnItemSelectedListener {
 
     private TextView mTextMessage;
     private Spinner playerSpinner;
-    private Spinner idSpinner;
-    private EditText inputID;
-    private TextView tvMainSelectedCate;
-    private TextView tv2;
-    private TextView tv3;
-    private TextView tv4;
-    private TextView tv5;
-    private TextView tv6;
+    private TextView tvName;
+    private TextView tvCountry;
+    private TextView tvClub;
+    private TextView tvAge;
+    private TextView tvOverall;
+    private TextView tvValue;
     private EditText teamInsert;
-    private ImageView tou;
+    private ImageView photo;
     private ImageView flag;
-    private ImageView clublogo;
-    //private ListView listView;
+    private ImageView clubLogo;
     private Button button;
     private ListView resultTeamView;
 
@@ -85,7 +68,9 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     private ArrayList<Team> resultTeams;
     private ArrayList<String> resultTeamsNames;
 
-
+    /**
+     * set listener on navigation buttons
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -99,89 +84,91 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                     mTextMessage.setText(R.string.title_home);
                     resultTeamView.setVisibility(View.INVISIBLE);
                     teamInsert.setVisibility(View.INVISIBLE);
-                    tvMainSelectedCate.setVisibility(View.VISIBLE);
-                    tv2.setVisibility(View.VISIBLE);
-                    tv3.setVisibility(View.VISIBLE);
-                    tv4.setVisibility(View.VISIBLE);
-                    tv5.setVisibility(View.VISIBLE);
-                    tv6.setVisibility(View.VISIBLE);
-                    tou.setVisibility(View.VISIBLE);
+                    tvName.setVisibility(View.VISIBLE);
+                    tvCountry.setVisibility(View.VISIBLE);
+                    tvClub.setVisibility(View.VISIBLE);
+                    tvAge.setVisibility(View.VISIBLE);
+                    tvOverall.setVisibility(View.VISIBLE);
+                    tvValue.setVisibility(View.VISIBLE);
+                    photo.setVisibility(View.VISIBLE);
                     flag.setVisibility(View.VISIBLE);
-                    clublogo.setVisibility(View.VISIBLE);
+                    clubLogo.setVisibility(View.VISIBLE);
                     button.setVisibility(View.INVISIBLE);
                     playerSpinner.setVisibility(View.VISIBLE);
                     int currentPos = playerSpinner.getSelectedItemPosition();
-                    tvMainSelectedCate.setText("Name: "
+                    tvName.setText("Name: "
                             + playerData.getPlayerList().get(currentPos).getName());
-                    tv2.setText("Country: "
+                    tvCountry.setText("Country: "
                             + playerData.getPlayerList().get(currentPos).getNationality());
-                    tv3.setText("Club: "
+                    tvClub.setText("Club: "
                             + playerData.getPlayerList().get(currentPos).getClub());
-                    tv4.setText("Age: "
+                    tvAge.setText("Age: "
                             + playerData.getPlayerList().get(currentPos).getAge());
-                    tv5.setText("Overall: "
+                    tvOverall.setText("Overall: "
                             + playerData.getPlayerList().get(currentPos).getOverall());
-                    tv6.setText("Value: €"
+                    tvValue.setText("Value: €"
                             + playerData.getPlayerList().get(currentPos).getValue());
-                    Picasso.with(tou.getContext()).load(playerData.getPlayerList().get(currentPos).getPhoto()).into(tou);
+                    Picasso.with(photo.getContext()).load(playerData.getPlayerList().get(currentPos).getPhoto()).into(photo);
                     Picasso.with(flag.getContext()).load(playerData.getPlayerList().get(currentPos).getFlag()).into(flag);
-                    Picasso.with(clublogo.getContext()).load(playerData.getPlayerList().get(currentPos).getClubLogo()).into(clublogo);
+                    Picasso.with(clubLogo.getContext()).load(playerData.getPlayerList().get(currentPos).getClubLogo()).into(clubLogo);
                     return true;
                     /**
                      *  When pressing team
                      */
                     case R.id.navigation_dashboard:
-
                         mTextMessage.setText("Search Team");
                         teamInsert.setVisibility(View.VISIBLE);
                         resultTeamView.setVisibility(View.VISIBLE);
                         button.setVisibility(View.VISIBLE);
                         playerSpinner.setVisibility(View.INVISIBLE);
-                        tvMainSelectedCate.setVisibility(View.INVISIBLE);
-                        tv2.setVisibility(View.INVISIBLE);
-                        tv3.setVisibility(View.INVISIBLE);
-                        tv4.setVisibility(View.INVISIBLE);
-                        tv5.setVisibility(View.INVISIBLE);
-                        tv6.setVisibility(View.INVISIBLE);
-                        tou.setVisibility(View.INVISIBLE);
+                        tvName.setVisibility(View.INVISIBLE);
+                        tvCountry.setVisibility(View.INVISIBLE);
+                        tvClub.setVisibility(View.INVISIBLE);
+                        tvAge.setVisibility(View.INVISIBLE);
+                        tvOverall.setVisibility(View.INVISIBLE);
+                        tvValue.setVisibility(View.INVISIBLE);
+                        photo.setVisibility(View.INVISIBLE);
                         flag.setVisibility(View.INVISIBLE);
-                        clublogo.setVisibility(View.INVISIBLE);
+                        clubLogo.setVisibility(View.INVISIBLE);
 
                         return true;
                     /**
                      * When pressing About us
                      */
                     case R.id.navigation_notifications:
-                        //mTextMessage.setText(R.string.title_notifications);
                         resultTeamView.setVisibility(View.INVISIBLE);
                         teamInsert.setVisibility(View.INVISIBLE);
-                        tvMainSelectedCate.setVisibility(View.VISIBLE);
-                        tv2.setVisibility(View.VISIBLE);
-                        tv3.setVisibility(View.VISIBLE);
-                        tv4.setVisibility(View.VISIBLE);
-                        tv5.setVisibility(View.VISIBLE);
-                        tv6.setVisibility(View.VISIBLE);
-                        tou.setVisibility(View.VISIBLE);
+                        tvName.setVisibility(View.VISIBLE);
+                        tvCountry.setVisibility(View.VISIBLE);
+                        tvClub.setVisibility(View.VISIBLE);
+                        tvAge.setVisibility(View.VISIBLE);
+                        tvOverall.setVisibility(View.VISIBLE);
+                        tvValue.setVisibility(View.VISIBLE);
+                        photo.setVisibility(View.VISIBLE);
                         flag.setVisibility(View.VISIBLE);
-                        clublogo.setVisibility(View.VISIBLE);
+                        clubLogo.setVisibility(View.VISIBLE);
                         mTextMessage.setText("About Us");
                         playerSpinner.setVisibility(View.INVISIBLE);
                         button.setVisibility(View.INVISIBLE);
-                        tvMainSelectedCate.setText("Zhao Li");
-                        tv2.setText("Qiyuan Xu");
-                        tv3.setText("Hai Cao");
-                        tv4.setText("");
-                        tv5.setText("");
-                        tv6.setText("");
-                        Picasso.with(tou.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(tou);
+                        tvName.setText("Zhao Li");
+                        tvCountry.setText("Qiyuan Xu");
+                        tvClub.setText("Hai Cao");
+                        tvAge.setText("");
+                        tvOverall.setText("");
+                        tvValue.setText("");
+                        Picasso.with(photo.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(photo);
                         Picasso.with(flag.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(flag);
-                        Picasso.with(clublogo.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(clublogo);
+                        Picasso.with(clubLogo.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(clubLogo);
                         return true;
             }
             return false;
         }
     };
 
+    /**
+     * Define things when creating the activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,36 +177,33 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
+        /**
+         * find all the widgets by ID
+         */
         playerData = new PlayerData();
         teamData = new TeamData();
         resultTeams = new ArrayList<>();
         resultTeamsNames = new ArrayList<>();
-
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         playerSpinner = (Spinner) findViewById(R.id.playerSpinner);
-        tvMainSelectedCate = (TextView) findViewById(R.id.tvMainSelectedCate);
-        tv2 = (TextView) findViewById(R.id.tv2);
-        tv3 = (TextView) findViewById(R.id.tv3);
-        tv4 = (TextView) findViewById(R.id.tv4);
-        tv5 = (TextView) findViewById(R.id.tv5);
-        tv6 = (TextView) findViewById(R.id.tv6);
-        tou = (ImageView) findViewById(R.id.tou);
+        tvName = (TextView) findViewById(R.id.tvMainSelectedCate);
+        tvCountry = (TextView) findViewById(R.id.tv2);
+        tvClub = (TextView) findViewById(R.id.tv3);
+        tvAge = (TextView) findViewById(R.id.tv4);
+        tvOverall = (TextView) findViewById(R.id.tv5);
+        tvValue = (TextView) findViewById(R.id.tv6);
+        photo = (ImageView) findViewById(R.id.tou);
         flag = (ImageView) findViewById(R.id.flag);
-        clublogo = (ImageView) findViewById(R.id.clublogo);
+        clubLogo = (ImageView) findViewById(R.id.clublogo);
         teamInsert = (EditText) findViewById(R.id.teamInsert);
         button = (Button) findViewById(R.id.button);
         resultTeamView = findViewById(R.id.resultTeamView);
 
-
-        List<String[]> list = new ArrayList<String[]>();
-        String next[] = {};
-        System.out.println("test!");
-
-        //read all data
+        /**
+         * read all data from csv
+         */
         try {
             InputStreamReader playerStream = new InputStreamReader(getAssets().open(
                             "PlayerPersonalData2.0.csv"
@@ -232,18 +216,19 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
             ));
             FifaDataController f = new FifaDataController(playerData, teamData, playerStream, teamStream, teamAttrStream);
             f.startReading();
-            System.out.println("asadd" + playerData.getPlayerList().get(0).getName());
-            System.out.println("asd" + teamData.getTeamList().get(0).toString());
-        } catch (IOException e) {
+        } catch (IOException e) {   //handle exceptions
             e.printStackTrace();
         }
-
+        /**
+         * set the Player spinner
+         */
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, playerData.getNameList());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         playerSpinner.setAdapter(adapter);
         playerSpinner.setOnItemSelectedListener(this);
-
+        /**
+         * set on item click listener on reasultTeam ListView
+         */
         resultTeamView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -251,14 +236,18 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                 Team seletedTeam = resultTeams.get(position);
                 System.out.println("codecode " + seletedTeam.getApiId());
                 ArrayList<Player> seletedTeamPlayers = (ArrayList) playerData.getTeamIndex().get(seletedTeam.getApiId());
-                //System.out.println("coding " + seletedTeamPlayers.get(0).toString());
-
+                /**
+                 * pass the team and the players in the team to the New activity
+                 */
                 Intent intent = new Intent(Main2Activity.this, DisplayMessageActivity.class);
                 intent.putExtra("seletedTeam", seletedTeam);
                 intent.putExtra("playersInTheTeam", seletedTeamPlayers);
                 startActivity(intent);
             }
         });
+        /**
+         * set listener for pressing ENTER in Team Search
+         */
         teamInsert.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -272,50 +261,60 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
 
     }
 
+    /**
+     * set response when seleted a player in the spinner
+     * @param arg0 current adapterview
+     * @param arg1  current view
+     * @param arg2  the seleted position in spinner
+     */
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        tvMainSelectedCate.setText("Name: "
+        tvName.setText("Name: "
                 + playerData.getPlayerList().get(arg2).getName());
-        tv2.setText("Country: "
+        tvCountry.setText("Country: "
                 + playerData.getPlayerList().get(arg2).getNationality());
-        tv3.setText("Club: "
+        tvClub.setText("Club: "
                 + playerData.getPlayerList().get(arg2).getClub());
-        tv4.setText("Age: "
+        tvAge.setText("Age: "
                 + playerData.getPlayerList().get(arg2).getAge());
-        tv5.setText("Overall: "
+        tvOverall.setText("Overall: "
                 + playerData.getPlayerList().get(arg2).getOverall());
-        tv6.setText("Value: €"
+        tvValue.setText("Value: €"
                 + playerData.getPlayerList().get(arg2).getValue());
-
-
-        Picasso.with(tou.getContext()).load(playerData.getPlayerList().get(arg2).getPhoto()).into(tou);
+        Picasso.with(photo.getContext()).load(playerData.getPlayerList().get(arg2).getPhoto()).into(photo);
         Picasso.with(flag.getContext()).load(playerData.getPlayerList().get(arg2).getFlag()).into(flag);
-        Picasso.with(clublogo.getContext()).load(playerData.getPlayerList().get(arg2).getClubLogo()).into(clublogo);
+        Picasso.with(clubLogo.getContext()).load(playerData.getPlayerList().get(arg2).getClubLogo()).into(clubLogo);
     }
-
-
 
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
 
     }
-
+    /**
+     * define the SearchTeam method when in team feature and press "search" button
+     */
     public void searchTeam(View view) {
-        // Do something in response to button
+        /**
+         * hide keyboard
+         */
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        /**
+         * get the input text from EditText teamInsert
+         */
         String input = teamInsert.getText().toString();
-
+        /**
+         * search the teams according to input-text as prefix
+         */
         resultTeams = (ArrayList) teamData.getTeamsByPrefix(input);
         resultTeamsNames = (ArrayList) teamData.getTeamNameByPrefix(input);
-
-        //resultTeamView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,  resultTeamsNames));
+        /**
+         * build the adaptor for ListView
+         */
         List<HashMap<String,Object>> mListData = getListData(resultTeams);
         SimpleAdapter adapter = new SimpleAdapter(this, mListData, R.layout.list_view_layout,
                 new String[]{"icon", "name"}, new int[]{R.id.photo, R.id.name});
-
         adapter.setViewBinder(new SimpleAdapter.ViewBinder() {
             public boolean setViewValue(View view, Object data,
                                         String textRepresentation) {
@@ -330,15 +329,11 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         resultTeamView.setAdapter(adapter);
     }
 
-    private ArrayList<String> getData(){
-        ArrayList<String> data = new ArrayList<String>();
-        data.add("测试数据1");
-        data.add("测试数据2");
-        data.add("测试数据3");
-        data.add("测试数据4");
-        return data;
-    }
-
+    /**
+     * get list for adaptor
+     * @param resultTeams resulting teams after search
+     * @return a lish of HaspMap, which has keys and values for adaptor to use
+     */
     public List<HashMap<String,Object>> getListData(ArrayList<Team> resultTeams){
         List<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
         HashMap<String,Object> map = null;
@@ -351,6 +346,11 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
         return list;
     }
 
+    /**
+     * get Bitmap from Internet URL for showing on ImageView
+     * @param photoUrl
+     * @return
+     */
     public Bitmap getBitmap(String photoUrl){
         Bitmap mBitmap = null;
         try {
