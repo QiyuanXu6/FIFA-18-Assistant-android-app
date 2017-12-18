@@ -96,10 +96,18 @@ public class PlayerData {
         return teamIndex != null ? teamIndex.equals(that.teamIndex) : that.teamIndex == null;
     }
 
+    /**
+     * Getter for hashmap of player id and player object
+     * @return hashmap of api id and player object
+     */
     public Map<Integer, Player> getIdIndex() {
         return idIndex;
     }
 
+    /**
+     * Getter for hashmap of team api id and player object list
+     * @return hashmap of team api id and player object list
+     */
     public Map<Integer, List<Player>> getTeamIndex() {
         return teamIndex;
     }
