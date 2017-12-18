@@ -1,4 +1,4 @@
-<center>**FIFA 18 Assistant Manual**</center>
+**FIFA 18 Assistant Manual**
 
 Group Members: Zhao Li, Qiyuan Xu, Hai Cao
 
