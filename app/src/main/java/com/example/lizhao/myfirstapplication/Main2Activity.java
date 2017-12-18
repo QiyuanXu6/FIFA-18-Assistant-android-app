@@ -153,9 +153,9 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
                         tvName.setText("Zhao Li");
                         tvCountry.setText("Qiyuan Xu");
                         tvClub.setText("Hai Cao");
-                        tvAge.setText("");
-                        tvOverall.setText("");
-                        tvValue.setText("");
+                        tvAge.setText("Special Thanks to: ");
+                        tvOverall.setText("Kirsten o(*^▽^*)o~♪");
+                        tvValue.setText("Obi        o(*^▽^*)o~♪");
                         Picasso.with(photo.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(photo);
                         Picasso.with(flag.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(flag);
                         Picasso.with(clubLogo.getContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png").into(clubLogo);
