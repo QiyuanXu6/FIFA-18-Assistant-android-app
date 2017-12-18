@@ -1,0 +1,301 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Player</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.fifa</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Player (com.fifa)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Player</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/ 28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.9%
+  </span>
+  <span class="absValue">
+    (91/ 92)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.fifa;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.Serializable;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;/**
+<i>6</i>&nbsp; * Created by qiyuanxu on 12/16/17.
+<i>7</i>&nbsp; * This class is created to hold values of one single player.
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;public class Player implements Serializable {
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    //Attributes of players
+<i>13</i>&nbsp;    private int id;
+<i>14</i>&nbsp;    private String name;
+<i>15</i>&nbsp;    private int age;
+<i>16</i>&nbsp;    private String photo;
+<i>17</i>&nbsp;    private String nationality;
+<i>18</i>&nbsp;    private String flag;
+<i>19</i>&nbsp;    private int overall;
+<i>20</i>&nbsp;    private int potential;
+<i>21</i>&nbsp;    private String club;
+<i>22</i>&nbsp;    private String clubLogo;
+<i>23</i>&nbsp;    private int value;
+<i>24</i>&nbsp;    private int wage;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    /**
+<i>27</i>&nbsp;     * Constructor method to pass attributes in
+<i>28</i>&nbsp;     * @param id id number of player
+<i>29</i>&nbsp;     * @param name name of the player
+<i>30</i>&nbsp;     * @param age age of the player
+<i>31</i>&nbsp;     * @param photo photo URL of the player
+<i>32</i>&nbsp;     * @param nationality nationality of the player
+<i>33</i>&nbsp;     * @param flag flag picture URL of the nationality
+<i>34</i>&nbsp;     * @param overall overall score of the player, full score is 100
+<i>35</i>&nbsp;     * @param potential potential score of the player
+<i>36</i>&nbsp;     * @param club club name of the player
+<i>37</i>&nbsp;     * @param clubLogo club logo URL of the player
+<i>38</i>&nbsp;     * @param value player&#39;s estimate price
+<i>39</i>&nbsp;     * @param wage player&#39;s wage in year
+<i>40</i>&nbsp;     */
+<b class="fc"><i>41</i>&nbsp;    public Player(int id, String name, int age, String photo, String nationality, String flag, int overall, int potential, String club, String clubLogo, int value, int wage) {</b>
+<b class="fc"><i>42</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>43</i>&nbsp;        this.name = name;</b>
+<b class="fc"><i>44</i>&nbsp;        this.age = age;</b>
+<b class="fc"><i>45</i>&nbsp;        this.photo = photo;</b>
+<b class="fc"><i>46</i>&nbsp;        this.nationality = nationality;</b>
+<b class="fc"><i>47</i>&nbsp;        this.flag = flag;</b>
+<b class="fc"><i>48</i>&nbsp;        this.overall = overall;</b>
+<b class="fc"><i>49</i>&nbsp;        this.potential = potential;</b>
+<b class="fc"><i>50</i>&nbsp;        this.club = club;</b>
+<b class="fc"><i>51</i>&nbsp;        this.clubLogo = clubLogo;</b>
+<b class="fc"><i>52</i>&nbsp;        this.value = value;</b>
+<b class="fc"><i>53</i>&nbsp;        this.wage = wage;</b>
+<b class="fc"><i>54</i>&nbsp;    }</b>
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    /**
+<i>57</i>&nbsp;     * This method is to produce a string of this player attributes
+<i>58</i>&nbsp;     * @return a string of attributes of player
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    @Override
+<i>61</i>&nbsp;    public String toString() {
+<b class="fc"><i>62</i>&nbsp;        return &quot;Player{&quot; +</b>
+<b class="fc"><i>63</i>&nbsp;                &quot;id=&quot; + getId() +</b>
+<b class="fc"><i>64</i>&nbsp;                &quot;, name=&#39;&quot; + getName() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>65</i>&nbsp;                &quot;, age=&quot; + getAge() +</b>
+<b class="fc"><i>66</i>&nbsp;                &quot;, photo=&#39;&quot; + getPhoto() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>67</i>&nbsp;                &quot;, nationality=&#39;&quot; + getNationality() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>68</i>&nbsp;                &quot;, flag=&#39;&quot; + getFlag() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>69</i>&nbsp;                &quot;, overall=&quot; + getOverall() +</b>
+<b class="fc"><i>70</i>&nbsp;                &quot;, potential=&quot; + getPotential() +</b>
+<b class="fc"><i>71</i>&nbsp;                &quot;, club=&#39;&quot; + getClub() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>72</i>&nbsp;                &quot;, clubLogo=&#39;&quot; + getClubLogo() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>73</i>&nbsp;                &quot;, value=&quot; + getValue() +</b>
+<b class="fc"><i>74</i>&nbsp;                &quot;, wage=&quot; + getWage() +</b>
+<i>75</i>&nbsp;                &#39;}&#39;;
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    /**
+<i>79</i>&nbsp;     *
+<i>80</i>&nbsp;     * Get and set method for private attributes
+<i>81</i>&nbsp;     */
+<i>82</i>&nbsp;    public int getId() {
+<b class="fc"><i>83</i>&nbsp;        return id;</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    public void setId(int id) {
+<b class="fc"><i>87</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>88</i>&nbsp;    }</b>
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    public String getName() {
+<b class="fc"><i>91</i>&nbsp;        return name;</b>
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    public void setName(String name) {
+<b class="fc"><i>95</i>&nbsp;        this.name = name;</b>
+<b class="fc"><i>96</i>&nbsp;    }</b>
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    public int getAge() {
+<b class="fc"><i>99</i>&nbsp;        return age;</b>
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    public void setAge(int age) {
+<b class="fc"><i>103</i>&nbsp;        this.age = age;</b>
+<b class="fc"><i>104</i>&nbsp;    }</b>
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    public String getPhoto() {
+<b class="fc"><i>107</i>&nbsp;        return photo;</b>
+<i>108</i>&nbsp;    }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    public void setPhoto(String photo) {
+<b class="fc"><i>111</i>&nbsp;        this.photo = photo;</b>
+<b class="fc"><i>112</i>&nbsp;    }</b>
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    public String getNationality() {
+<b class="fc"><i>115</i>&nbsp;        return nationality;</b>
+<i>116</i>&nbsp;    }
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;    public void setNationality(String nationality) {
+<b class="fc"><i>119</i>&nbsp;        this.nationality = nationality;</b>
+<b class="fc"><i>120</i>&nbsp;    }</b>
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    public String getFlag() {
+<b class="fc"><i>123</i>&nbsp;        return flag;</b>
+<i>124</i>&nbsp;    }
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    public void setFlag(String flag) {
+<b class="fc"><i>127</i>&nbsp;        this.flag = flag;</b>
+<b class="fc"><i>128</i>&nbsp;    }</b>
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    public int getOverall() {
+<b class="fc"><i>131</i>&nbsp;        return overall;</b>
+<i>132</i>&nbsp;    }
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    public void setOverall(int overall) {
+<b class="fc"><i>135</i>&nbsp;        this.overall = overall;</b>
+<b class="fc"><i>136</i>&nbsp;    }</b>
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;    public int getPotential() {
+<b class="fc"><i>139</i>&nbsp;        return potential;</b>
+<i>140</i>&nbsp;    }
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;    public void setPotential(int potential) {
+<b class="fc"><i>143</i>&nbsp;        this.potential = potential;</b>
+<b class="fc"><i>144</i>&nbsp;    }</b>
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;    public String getClub() {
+<b class="fc"><i>147</i>&nbsp;        return club;</b>
+<i>148</i>&nbsp;    }
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;    public void setClub(String club) {
+<b class="fc"><i>151</i>&nbsp;        this.club = club;</b>
+<b class="fc"><i>152</i>&nbsp;    }</b>
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    public String getClubLogo() {
+<b class="fc"><i>155</i>&nbsp;        return clubLogo;</b>
+<i>156</i>&nbsp;    }
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;    public void setClubLogo(String clubLogo) {
+<b class="fc"><i>159</i>&nbsp;        this.clubLogo = clubLogo;</b>
+<b class="fc"><i>160</i>&nbsp;    }</b>
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;    public int getValue() {
+<b class="fc"><i>163</i>&nbsp;        return value;</b>
+<i>164</i>&nbsp;    }
+<i>165</i>&nbsp;
+<i>166</i>&nbsp;    public void setValue(int value) {
+<b class="fc"><i>167</i>&nbsp;        this.value = value;</b>
+<b class="fc"><i>168</i>&nbsp;    }</b>
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;    public int getWage() {
+<b class="fc"><i>171</i>&nbsp;        return wage;</b>
+<i>172</i>&nbsp;    }
+<i>173</i>&nbsp;
+<i>174</i>&nbsp;    public void setWage(int wage) {
+<b class="fc"><i>175</i>&nbsp;        this.wage = wage;</b>
+<b class="fc"><i>176</i>&nbsp;    }</b>
+<i>177</i>&nbsp;
+<i>178</i>&nbsp;    @Override
+<i>179</i>&nbsp;    public boolean equals(Object o) {
+<b class="fc"><i>180</i>&nbsp;        if (this == o) return true;</b>
+<b class="fc"><i>181</i>&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<i>182</i>&nbsp;
+<b class="fc"><i>183</i>&nbsp;        Player player = (Player) o;</b>
+<i>184</i>&nbsp;
+<b class="fc"><i>185</i>&nbsp;        if (id != player.id) return false;</b>
+<b class="fc"><i>186</i>&nbsp;        if (age != player.age) return false;</b>
+<b class="fc"><i>187</i>&nbsp;        if (overall != player.overall) return false;</b>
+<b class="fc"><i>188</i>&nbsp;        if (potential != player.potential) return false;</b>
+<b class="fc"><i>189</i>&nbsp;        if (value != player.value) return false;</b>
+<b class="fc"><i>190</i>&nbsp;        if (wage != player.wage) return false;</b>
+<b class="fc"><i>191</i>&nbsp;        if (name != null ? !name.equals(player.name) : player.name != null) return false;</b>
+<b class="fc"><i>192</i>&nbsp;        if (photo != null ? !photo.equals(player.photo) : player.photo != null) return false;</b>
+<b class="fc"><i>193</i>&nbsp;        if (nationality != null ? !nationality.equals(player.nationality) : player.nationality != null)</b>
+<b class="nc"><i>194</i>&nbsp;            return false;</b>
+<b class="fc"><i>195</i>&nbsp;        if (flag != null ? !flag.equals(player.flag) : player.flag != null) return false;</b>
+<b class="fc"><i>196</i>&nbsp;        if (club != null ? !club.equals(player.club) : player.club != null) return false;</b>
+<b class="fc"><i>197</i>&nbsp;        return clubLogo != null ? clubLogo.equals(player.clubLogo) : player.clubLogo == null;</b>
+<i>198</i>&nbsp;    }
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;    /**
+<i>201</i>&nbsp;     * This method reset a Player object, all integer numbers to -1, all string fields to empty String
+<i>202</i>&nbsp;     */
+<i>203</i>&nbsp;    public void resetPlayer() {
+<b class="fc"><i>204</i>&nbsp;        setAge(-1);</b>
+<b class="fc"><i>205</i>&nbsp;        setClub(&quot;&quot;);</b>
+<b class="fc"><i>206</i>&nbsp;        setClubLogo(&quot;&quot;);</b>
+<b class="fc"><i>207</i>&nbsp;        setFlag(&quot;&quot;);</b>
+<b class="fc"><i>208</i>&nbsp;        setNationality(&quot;&quot;);</b>
+<b class="fc"><i>209</i>&nbsp;        setId(-1);</b>
+<b class="fc"><i>210</i>&nbsp;        setName(&quot;&quot;);</b>
+<b class="fc"><i>211</i>&nbsp;        setOverall(-1);</b>
+<b class="fc"><i>212</i>&nbsp;        setPhoto(&quot;&quot;);</b>
+<b class="fc"><i>213</i>&nbsp;        setPotential(-1);</b>
+<b class="fc"><i>214</i>&nbsp;        setValue(-1);</b>
+<b class="fc"><i>215</i>&nbsp;        setWage(-1);</b>
+<b class="fc"><i>216</i>&nbsp;    }</b>
+<i>217</i>&nbsp;
+<i>218</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-12-17 20:11</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PlayerData</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.fifa</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PlayerData (com.fifa)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlayerData</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.3%
+  </span>
+  <span class="absValue">
+    (36/ 37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.fifa;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.ArrayList;
+<i>4</i>&nbsp;import java.util.HashMap;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;import java.util.Map;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * Created by qiyuanxu on 12/16/17.
+<i>10</i>&nbsp; * This is a class to manage all players data create indexes for quick query
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;public class PlayerData {
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    //playerList holds all Player objects in the order of reading
+<i>16</i>&nbsp;    private List&lt;Player&gt; playerList;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    //indexes are hash maps to improve query efficiency
+<i>19</i>&nbsp;    private Map&lt;Integer, Player&gt; idIndex;
+<i>20</i>&nbsp;    private Map&lt;Integer, List&lt;Player&gt;&gt; teamIndex;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    /**
+<i>23</i>&nbsp;     * Constructor method
+<i>24</i>&nbsp;     */
+<b class="fc"><i>25</i>&nbsp;    public PlayerData() {</b>
+<b class="fc"><i>26</i>&nbsp;        playerList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>27</i>&nbsp;    }</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    /**
+<i>30</i>&nbsp;     * Method to add a new player into this dataset.
+<i>31</i>&nbsp;     * No duplication in CSV file after data cleaning.
+<i>32</i>&nbsp;     * @param player new Player object to be added in.
+<i>33</i>&nbsp;     */
+<i>34</i>&nbsp;    public void add(Player player) {
+<b class="fc"><i>35</i>&nbsp;        playerList.add(player);</b>
+<b class="fc"><i>36</i>&nbsp;    }</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    /**
+<i>39</i>&nbsp;     * This method is created to create all hash maps to accelerate data querying.
+<i>40</i>&nbsp;     * @param teamData
+<i>41</i>&nbsp;     */
+<i>42</i>&nbsp;    public void createIndex(TeamData teamData) {
+<b class="fc"><i>43</i>&nbsp;        createIndexWithId();</b>
+<b class="fc"><i>44</i>&nbsp;        createIndexWithTeam(teamData);</b>
+<b class="fc"><i>45</i>&nbsp;    }</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    /**
+<i>48</i>&nbsp;     * This method is built to create a hashmap of id with Player object.
+<i>49</i>&nbsp;     */
+<i>50</i>&nbsp;    private void createIndexWithId() {
+<b class="fc"><i>51</i>&nbsp;        idIndex = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>52</i>&nbsp;        for (int i = 0; i &lt; playerList.size(); i++) {</b>
+<b class="fc"><i>53</i>&nbsp;            idIndex.put(playerList.get(i).getId(), playerList.get(i));</b>
+<i>54</i>&nbsp;        }
+<b class="fc"><i>55</i>&nbsp;    }</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    /**
+<i>58</i>&nbsp;     * This method is built to create a hashmap of team id with list of a player objects who are
+<i>59</i>&nbsp;     * in this team
+<i>60</i>&nbsp;     * @param teamData
+<i>61</i>&nbsp;     */
+<i>62</i>&nbsp;    private void createIndexWithTeam(TeamData teamData) {
+<b class="fc"><i>63</i>&nbsp;        teamIndex = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>64</i>&nbsp;        for (int i = 0; i &lt; playerList.size(); i++) {</b>
+<b class="fc"><i>65</i>&nbsp;            String club = String.valueOf(playerList.get(i).getClub());</b>
+<b class="fc"><i>66</i>&nbsp;            Team team = teamData.getTeamByName(club);</b>
+<b class="fc"><i>67</i>&nbsp;            if (team == null) {</b>
+<b class="fc"><i>68</i>&nbsp;                continue;</b>
+<i>69</i>&nbsp;            } else {
+<b class="fc"><i>70</i>&nbsp;                if (!teamIndex.containsKey(team.getApiId())) {</b>
+<b class="fc"><i>71</i>&nbsp;                    teamIndex.put(team.getApiId(), new ArrayList&lt;Player&gt;());</b>
+<i>72</i>&nbsp;                }
+<b class="fc"><i>73</i>&nbsp;                teamIndex.get(team.getApiId()).add(playerList.get(i));</b>
+<i>74</i>&nbsp;            }
+<i>75</i>&nbsp;        }
+<b class="fc"><i>76</i>&nbsp;    }</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    /**
+<i>79</i>&nbsp;     * Getter for playerList
+<i>80</i>&nbsp;     * @return List of players
+<i>81</i>&nbsp;     */
+<i>82</i>&nbsp;    public List&lt;Player&gt; getPlayerList() {
+<b class="fc"><i>83</i>&nbsp;        return playerList;</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    @Override
+<i>87</i>&nbsp;    public boolean equals(Object o) {
+<b class="fc"><i>88</i>&nbsp;        if (this == o) return true;</b>
+<b class="fc"><i>89</i>&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<i>90</i>&nbsp;
+<b class="fc"><i>91</i>&nbsp;        PlayerData that = (PlayerData) o;</b>
+<i>92</i>&nbsp;
+<b class="fc"><i>93</i>&nbsp;        if (playerList != null ? !playerList.equals(that.playerList) : that.playerList != null)</b>
+<b class="nc"><i>94</i>&nbsp;            return false;</b>
+<b class="fc"><i>95</i>&nbsp;        if (idIndex != null ? !idIndex.equals(that.idIndex) : that.idIndex != null) return false;</b>
+<b class="fc"><i>96</i>&nbsp;        return teamIndex != null ? teamIndex.equals(that.teamIndex) : that.teamIndex == null;</b>
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    /**
+<i>100</i>&nbsp;     * Getter for hashmap of player id and player object
+<i>101</i>&nbsp;     * @return hashmap of api id and player object
+<i>102</i>&nbsp;     */
+<i>103</i>&nbsp;    public Map&lt;Integer, Player&gt; getIdIndex() {
+<b class="fc"><i>104</i>&nbsp;        return idIndex;</b>
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    /**
+<i>108</i>&nbsp;     * Getter for hashmap of team api id and player object list
+<i>109</i>&nbsp;     * @return hashmap of team api id and player object list
+<i>110</i>&nbsp;     */
+<i>111</i>&nbsp;    public Map&lt;Integer, List&lt;Player&gt;&gt; getTeamIndex() {
+<b class="fc"><i>112</i>&nbsp;        return teamIndex;</b>
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;    /**
+<i>115</i>&nbsp;     * get a list of all names of players
+<i>116</i>&nbsp;     * @return list of all names of players
+<i>117</i>&nbsp;     */
+<i>118</i>&nbsp;    public ArrayList&lt;String&gt; getNameList() {
+<b class="fc"><i>119</i>&nbsp;        ArrayList&lt;String&gt; nameList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>120</i>&nbsp;        for (Player p: playerList) {</b>
+<b class="fc"><i>121</i>&nbsp;            nameList.add(p.getName());</b>
+<b class="fc"><i>122</i>&nbsp;        }</b>
+<b class="fc"><i>123</i>&nbsp;        return nameList;</b>
+<i>124</i>&nbsp;    }
+<i>125</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-12-17 20:11</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PrefixTree</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.fifa</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PrefixTree (com.fifa)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrefixTree</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.7%
+  </span>
+  <span class="absValue">
+    (29/ 30)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PrefixTree$Node</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.1%
+  </span>
+  <span class="absValue">
+    (34/ 35)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.fifa;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.ArrayList;
+<i>4</i>&nbsp;import java.util.HashMap;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;import java.util.Map;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * Created by qiyuanxu on 12/16/17.
+<i>10</i>&nbsp; * This is class for the data structure of prefix tree
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;public class PrefixTree&lt;T&gt; {
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    private Node root;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    /**
+<i>18</i>&nbsp;     * inner class Node represents Tree Node
+<i>19</i>&nbsp;     */
+<b class="fc"><i>20</i>&nbsp;    private class Node {</b>
+<i>21</i>&nbsp;        private List&lt;T&gt; objs;
+<i>22</i>&nbsp;        private Map&lt;Character, Node&gt; children;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;        @SuppressWarnings(&quot;unchecked&quot;)
+<b class="fc"><i>25</i>&nbsp;        public Node () {</b>
+<b class="fc"><i>26</i>&nbsp;            this.objs = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>27</i>&nbsp;            children = new HashMap&lt;&gt;(26);</b>
+<b class="fc"><i>28</i>&nbsp;        }</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    /**
+<i>32</i>&nbsp;     * Constructor method for prefix tree;
+<i>33</i>&nbsp;     */
+<b class="fc"><i>34</i>&nbsp;    public PrefixTree() {</b>
+<b class="fc"><i>35</i>&nbsp;        this.root = new Node();</b>
+<b class="fc"><i>36</i>&nbsp;    }</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    /**
+<i>39</i>&nbsp;     * insert a node with object of type T into the tree
+<i>40</i>&nbsp;     * @param key string key of the object, which is the name of the team
+<i>41</i>&nbsp;     * @param obj object is the thing we store in the tree node
+<i>42</i>&nbsp;     */
+<i>43</i>&nbsp;    public void insert(String key, T obj) {
+<b class="fc"><i>44</i>&nbsp;        key = key.toLowerCase();</b>
+<b class="fc"><i>45</i>&nbsp;        Node cur = root;</b>
+<b class="fc"><i>46</i>&nbsp;        for (char c: key.toCharArray()) {</b>
+<b class="fc"><i>47</i>&nbsp;            if (c &gt;= &#39;a&#39; &amp;&amp; c &lt;= &#39;z&#39;) {</b>
+<b class="fc"><i>48</i>&nbsp;                if (cur.children.containsKey(c)) {</b>
+<b class="fc"><i>49</i>&nbsp;                    cur = cur.children.get(c);</b>
+<i>50</i>&nbsp;                } else {
+<b class="fc"><i>51</i>&nbsp;                    cur.children.put(c, new Node());</b>
+<b class="fc"><i>52</i>&nbsp;                    cur = cur.children.get(c);</b>
+<i>53</i>&nbsp;                }
+<i>54</i>&nbsp;            }
+<i>55</i>&nbsp;        }
+<b class="fc"><i>56</i>&nbsp;        cur.objs.add(obj);</b>
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    /**
+<i>60</i>&nbsp;     * Method to find object with a prefix key
+<i>61</i>&nbsp;     * @param key prefix key of the search query
+<i>62</i>&nbsp;     * @return list of objects with the prefix key
+<i>63</i>&nbsp;     */
+<i>64</i>&nbsp;    public List&lt;T&gt; findPrefix(String key) {
+<b class="fc"><i>65</i>&nbsp;        key = key.toLowerCase();</b>
+<b class="fc"><i>66</i>&nbsp;        Node cur = root;</b>
+<b class="fc"><i>67</i>&nbsp;        List&lt;T&gt; res = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>68</i>&nbsp;        for (char c: key.toCharArray()) {</b>
+<b class="fc"><i>69</i>&nbsp;            if (c &gt;= &#39;a&#39; &amp;&amp; c &lt;= &#39;z&#39;) {</b>
+<b class="fc"><i>70</i>&nbsp;                if (!cur.children.containsKey(c)) {</b>
+<b class="nc"><i>71</i>&nbsp;                    return res;</b>
+<i>72</i>&nbsp;                }
+<b class="fc"><i>73</i>&nbsp;                cur = cur.children.get(c);</b>
+<i>74</i>&nbsp;            }
+<i>75</i>&nbsp;        }
+<b class="fc"><i>76</i>&nbsp;        traversal(res, cur);</b>
+<b class="fc"><i>77</i>&nbsp;        return res;</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    /**
+<i>81</i>&nbsp;     * Method to recursively find all objects stored in the node&#39;s subtree
+<i>82</i>&nbsp;     * @param res list of objects
+<i>83</i>&nbsp;     * @param cur current node being visiting
+<i>84</i>&nbsp;     */
+<i>85</i>&nbsp;    private void traversal(List&lt;T&gt; res, Node cur) {
+<i>86</i>&nbsp;
+<b class="fc"><i>87</i>&nbsp;        if (cur == null) return;</b>
+<i>88</i>&nbsp;
+<b class="fc"><i>89</i>&nbsp;        if (cur.objs.size() != 0) {</b>
+<b class="fc"><i>90</i>&nbsp;            res.addAll(cur.objs);</b>
+<i>91</i>&nbsp;        }
+<b class="fc"><i>92</i>&nbsp;        for (Map.Entry&lt;Character, Node&gt; en: cur.children.entrySet()) {</b>
+<b class="fc"><i>93</i>&nbsp;            traversal(res, en.getValue());</b>
+<b class="fc"><i>94</i>&nbsp;        }</b>
+<b class="fc"><i>95</i>&nbsp;    }</b>
+<i>96</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-12-17 20:11</div>
+</div>
+</body>
+</html>

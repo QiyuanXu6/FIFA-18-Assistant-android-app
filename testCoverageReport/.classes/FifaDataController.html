@@ -1,0 +1,131 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FifaDataController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.fifa</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FifaDataController (com.fifa)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FifaDataController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.fifa;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.InputStreamReader;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;/**
+<i>6</i>&nbsp; * Created by qiyuanxu on 12/16/17.
+<i>7</i>&nbsp; * This class is built to manage the whole data reading process
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;public class FifaDataController {
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    //Variables of data
+<i>13</i>&nbsp;    private PlayerData playerData;
+<i>14</i>&nbsp;    private TeamData teamData;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    //Variables of Passed in streams
+<i>17</i>&nbsp;    private InputStreamReader playerSteam;
+<i>18</i>&nbsp;    private InputStreamReader teamStream;
+<i>19</i>&nbsp;    private InputStreamReader teamAttrStream;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * Constructor method to pass all necessary values in.
+<i>23</i>&nbsp;     * @param playerData object to manage all player data
+<i>24</i>&nbsp;     * @param teamData  object to manage all team data
+<i>25</i>&nbsp;     * @param playerSteam player data stream
+<i>26</i>&nbsp;     * @param teamStream  team data stream
+<i>27</i>&nbsp;     * @param teamAttrStream team attribute data stream
+<i>28</i>&nbsp;     */
+<b class="fc"><i>29</i>&nbsp;    public FifaDataController(PlayerData playerData, TeamData teamData, InputStreamReader playerSteam, InputStreamReader teamStream, InputStreamReader teamAttrStream) {</b>
+<b class="fc"><i>30</i>&nbsp;        this.playerData = playerData;</b>
+<b class="fc"><i>31</i>&nbsp;        this.teamData = teamData;</b>
+<b class="fc"><i>32</i>&nbsp;        this.playerSteam = playerSteam;</b>
+<b class="fc"><i>33</i>&nbsp;        this.teamStream = teamStream;</b>
+<b class="fc"><i>34</i>&nbsp;        this.teamAttrStream = teamAttrStream;</b>
+<b class="fc"><i>35</i>&nbsp;    }</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * This method is built to read all data streams into playerData and teamData
+<i>39</i>&nbsp;     */
+<i>40</i>&nbsp;    public void startReading() {
+<b class="fc"><i>41</i>&nbsp;        TeamReader teamReader = new TeamReader(teamStream, teamAttrStream, teamData);</b>
+<b class="fc"><i>42</i>&nbsp;        teamReader.read();</b>
+<b class="fc"><i>43</i>&nbsp;        PlayerReader playerReader = new PlayerReader(playerSteam, playerData, teamData);</b>
+<b class="fc"><i>44</i>&nbsp;        playerReader.read();</b>
+<b class="fc"><i>45</i>&nbsp;    }</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-12-17 20:11</div>
+</div>
+</body>
+</html>
