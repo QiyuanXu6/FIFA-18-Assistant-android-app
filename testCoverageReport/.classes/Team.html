@@ -1,0 +1,289 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Team</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.fifa</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Team (com.fifa)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Team</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/ 28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.5%
+  </span>
+  <span class="absValue">
+    (84/ 88)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.fifa;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.Serializable;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;/**
+<i>6</i>&nbsp; * Created by qiyuanxu on 12/16/17.
+<i>7</i>&nbsp; * This class is created to hold a team object.
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;public class Team implements Serializable {
+<i>11</i>&nbsp;    //Team attributes
+<i>12</i>&nbsp;    private int id;
+<i>13</i>&nbsp;    private int apiId;
+<i>14</i>&nbsp;    private int fifaId;
+<i>15</i>&nbsp;    private String longName;
+<i>16</i>&nbsp;    private String shortName;
+<i>17</i>&nbsp;    private String date;
+<i>18</i>&nbsp;    private int buildUpPlaySpeed;
+<i>19</i>&nbsp;    private String buildUpPlaySpeedClass;
+<i>20</i>&nbsp;    private int buildUpPlayDribbling;
+<i>21</i>&nbsp;    private String buildUpPlayDribblingClass;
+<i>22</i>&nbsp;    private int buildUpPlayPassing;
+<i>23</i>&nbsp;    private String buildUpPlayPassingClass;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    /**
+<i>26</i>&nbsp;     * Constructor for this class
+<i>27</i>&nbsp;     * @param id id number of the team
+<i>28</i>&nbsp;     * @param apiId api id number of the team
+<i>29</i>&nbsp;     * @param fifaId fifa id of the team
+<i>30</i>&nbsp;     * @param longName long name of the team
+<i>31</i>&nbsp;     * @param shortName short name of the team
+<i>32</i>&nbsp;     */
+<b class="fc"><i>33</i>&nbsp;    public Team(int id, int apiId, int fifaId, String longName, String shortName) {</b>
+<b class="fc"><i>34</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>35</i>&nbsp;        this.apiId = apiId;</b>
+<b class="fc"><i>36</i>&nbsp;        this.fifaId = fifaId;</b>
+<b class="fc"><i>37</i>&nbsp;        this.longName = longName;</b>
+<b class="fc"><i>38</i>&nbsp;        this.shortName = shortName;</b>
+<b class="fc"><i>39</i>&nbsp;    }</b>
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    /**
+<i>42</i>&nbsp;     * A method to produce a string to describe this team
+<i>43</i>&nbsp;     * @return a string of different attributes of the team.
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    @Override
+<i>46</i>&nbsp;    public String toString() {
+<b class="fc"><i>47</i>&nbsp;        return &quot;Team{&quot; +</b>
+<b class="fc"><i>48</i>&nbsp;                &quot;id=&quot; + getId() +</b>
+<b class="fc"><i>49</i>&nbsp;                &quot;, apiId=&quot; + getApiId() +</b>
+<b class="fc"><i>50</i>&nbsp;                &quot;, fifaId=&quot; + getFifaId() +</b>
+<b class="fc"><i>51</i>&nbsp;                &quot;, longName=&#39;&quot; + getLongName() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>52</i>&nbsp;                &quot;, shortName=&#39;&quot; + getShortName() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>53</i>&nbsp;                &quot;, date=&#39;&quot; + getDate() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>54</i>&nbsp;                &quot;, buildUpPlaySpeed=&quot; + getBuildUpPlaySpeed() +</b>
+<b class="fc"><i>55</i>&nbsp;                &quot;, buildUpPlaySpeedClass=&#39;&quot; + getBuildUpPlaySpeedClass() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>56</i>&nbsp;                &quot;, buildUpPlayDribbling=&quot; + getBuildUpPlayDribbling() +</b>
+<b class="fc"><i>57</i>&nbsp;                &quot;, buildUpPlayDribblingClass=&#39;&quot; + getBuildUpPlayDribblingClass() + &#39;\&#39;&#39; +</b>
+<b class="fc"><i>58</i>&nbsp;                &quot;, buildUpPlayPassing=&quot; + getBuildUpPlayPassing() +</b>
+<b class="fc"><i>59</i>&nbsp;                &quot;, buildUpPlayPassingClass=&#39;&quot; + getBuildUpPlayPassingClass() + &#39;\&#39;&#39; +</b>
+<i>60</i>&nbsp;                &#39;}&#39;;
+<i>61</i>&nbsp;    }
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    /**
+<i>65</i>&nbsp;     * getter and setter for instance variables
+<i>66</i>&nbsp;     */
+<i>67</i>&nbsp;    public int getId() {
+<b class="fc"><i>68</i>&nbsp;        return id;</b>
+<i>69</i>&nbsp;    }
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    public void setId(int id) {
+<b class="fc"><i>72</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>73</i>&nbsp;    }</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    public int getApiId() {
+<b class="fc"><i>76</i>&nbsp;        return apiId;</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    public void setApiId(int apiId) {
+<b class="fc"><i>80</i>&nbsp;        this.apiId = apiId;</b>
+<b class="fc"><i>81</i>&nbsp;    }</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    public int getFifaId() {
+<b class="fc"><i>84</i>&nbsp;        return fifaId;</b>
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    public void setFifaId(int fifaId) {
+<b class="fc"><i>88</i>&nbsp;        this.fifaId = fifaId;</b>
+<b class="fc"><i>89</i>&nbsp;    }</b>
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    public String getLongName() {
+<b class="fc"><i>92</i>&nbsp;        return longName;</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    public void setLongName(String longName) {
+<b class="fc"><i>96</i>&nbsp;        this.longName = longName;</b>
+<b class="fc"><i>97</i>&nbsp;    }</b>
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    public String getShortName() {
+<b class="fc"><i>100</i>&nbsp;        return shortName;</b>
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    public void setShortName(String shortName) {
+<b class="fc"><i>104</i>&nbsp;        this.shortName = shortName;</b>
+<b class="fc"><i>105</i>&nbsp;    }</b>
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    public String getDate() {
+<b class="fc"><i>108</i>&nbsp;        return date;</b>
+<i>109</i>&nbsp;    }
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    public void setDate(String date) {
+<b class="fc"><i>112</i>&nbsp;        this.date = date;</b>
+<b class="fc"><i>113</i>&nbsp;    }</b>
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;    public int getBuildUpPlaySpeed() {
+<b class="fc"><i>116</i>&nbsp;        return buildUpPlaySpeed;</b>
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    public void setBuildUpPlaySpeed(int buildUpPlaySpeed) {
+<b class="fc"><i>120</i>&nbsp;        this.buildUpPlaySpeed = buildUpPlaySpeed;</b>
+<b class="fc"><i>121</i>&nbsp;    }</b>
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    public String getBuildUpPlaySpeedClass() {
+<b class="fc"><i>124</i>&nbsp;        return buildUpPlaySpeedClass;</b>
+<i>125</i>&nbsp;    }
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;    public void setBuildUpPlaySpeedClass(String buildUpPlaySpeedClass) {
+<b class="fc"><i>128</i>&nbsp;        this.buildUpPlaySpeedClass = buildUpPlaySpeedClass;</b>
+<b class="fc"><i>129</i>&nbsp;    }</b>
+<i>130</i>&nbsp;
+<i>131</i>&nbsp;    public int getBuildUpPlayDribbling() {
+<b class="fc"><i>132</i>&nbsp;        return buildUpPlayDribbling;</b>
+<i>133</i>&nbsp;    }
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;    public void setBuildUpPlayDribbling(int buildUpPlayDribbling) {
+<b class="fc"><i>136</i>&nbsp;        this.buildUpPlayDribbling = buildUpPlayDribbling;</b>
+<b class="fc"><i>137</i>&nbsp;    }</b>
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;    public String getBuildUpPlayDribblingClass() {
+<b class="fc"><i>140</i>&nbsp;        return buildUpPlayDribblingClass;</b>
+<i>141</i>&nbsp;    }
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;    public void setBuildUpPlayDribblingClass(String buildUpPlayDribblingClass) {
+<b class="fc"><i>144</i>&nbsp;        this.buildUpPlayDribblingClass = buildUpPlayDribblingClass;</b>
+<b class="fc"><i>145</i>&nbsp;    }</b>
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;    public int getBuildUpPlayPassing() {
+<b class="fc"><i>148</i>&nbsp;        return buildUpPlayPassing;</b>
+<i>149</i>&nbsp;    }
+<i>150</i>&nbsp;
+<i>151</i>&nbsp;    public void setBuildUpPlayPassing(int buildUpPlayPassing) {
+<b class="fc"><i>152</i>&nbsp;        this.buildUpPlayPassing = buildUpPlayPassing;</b>
+<b class="fc"><i>153</i>&nbsp;    }</b>
+<i>154</i>&nbsp;
+<i>155</i>&nbsp;    public String getBuildUpPlayPassingClass() {
+<b class="fc"><i>156</i>&nbsp;        return buildUpPlayPassingClass;</b>
+<i>157</i>&nbsp;    }
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;    public void setBuildUpPlayPassingClass(String buildUpPlayPassingClass) {
+<b class="fc"><i>160</i>&nbsp;        this.buildUpPlayPassingClass = buildUpPlayPassingClass;</b>
+<b class="fc"><i>161</i>&nbsp;    }</b>
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    @Override
+<i>164</i>&nbsp;    public boolean equals(Object o) {
+<b class="fc"><i>165</i>&nbsp;        if (this == o) return true;</b>
+<b class="fc"><i>166</i>&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<i>167</i>&nbsp;
+<b class="fc"><i>168</i>&nbsp;        Team team = (Team) o;</b>
+<i>169</i>&nbsp;
+<b class="fc"><i>170</i>&nbsp;        if (id != team.id) return false;</b>
+<b class="fc"><i>171</i>&nbsp;        if (apiId != team.apiId) return false;</b>
+<b class="fc"><i>172</i>&nbsp;        if (fifaId != team.fifaId) return false;</b>
+<b class="fc"><i>173</i>&nbsp;        if (buildUpPlaySpeed != team.buildUpPlaySpeed) return false;</b>
+<b class="fc"><i>174</i>&nbsp;        if (buildUpPlayDribbling != team.buildUpPlayDribbling) return false;</b>
+<b class="fc"><i>175</i>&nbsp;        if (buildUpPlayPassing != team.buildUpPlayPassing) return false;</b>
+<b class="fc"><i>176</i>&nbsp;        if (longName != null ? !longName.equals(team.longName) : team.longName != null)</b>
+<b class="nc"><i>177</i>&nbsp;            return false;</b>
+<b class="fc"><i>178</i>&nbsp;        if (shortName != null ? !shortName.equals(team.shortName) : team.shortName != null)</b>
+<b class="nc"><i>179</i>&nbsp;            return false;</b>
+<b class="fc"><i>180</i>&nbsp;        if (date != null ? !date.equals(team.date) : team.date != null) return false;</b>
+<b class="fc"><i>181</i>&nbsp;        if (buildUpPlaySpeedClass != null ? !buildUpPlaySpeedClass.equals(team.buildUpPlaySpeedClass) : team.buildUpPlaySpeedClass != null)</b>
+<b class="nc"><i>182</i>&nbsp;            return false;</b>
+<b class="fc"><i>183</i>&nbsp;        if (buildUpPlayDribblingClass != null ? !buildUpPlayDribblingClass.equals(team.buildUpPlayDribblingClass) : team.buildUpPlayDribblingClass != null)</b>
+<b class="nc"><i>184</i>&nbsp;            return false;</b>
+<b class="fc"><i>185</i>&nbsp;        return buildUpPlayPassingClass != null ? buildUpPlayPassingClass.equals(team.buildUpPlayPassingClass) : team.buildUpPlayPassingClass == null;</b>
+<i>186</i>&nbsp;    }
+<i>187</i>&nbsp;
+<i>188</i>&nbsp;    /**
+<i>189</i>&nbsp;     * This method reset a Team object.
+<i>190</i>&nbsp;     */
+<i>191</i>&nbsp;    public void resetTeam() {
+<b class="fc"><i>192</i>&nbsp;        setApiId(-1);</b>
+<b class="fc"><i>193</i>&nbsp;        setLongName(&quot;&quot;);</b>
+<b class="fc"><i>194</i>&nbsp;        setShortName(&quot;&quot;);</b>
+<b class="fc"><i>195</i>&nbsp;        setId(-1);</b>
+<b class="fc"><i>196</i>&nbsp;        setFifaId(-1);</b>
+<b class="fc"><i>197</i>&nbsp;        setDate(null);</b>
+<b class="fc"><i>198</i>&nbsp;        setBuildUpPlayDribblingClass(null);</b>
+<b class="fc"><i>199</i>&nbsp;        setBuildUpPlaySpeedClass(null);</b>
+<b class="fc"><i>200</i>&nbsp;        setBuildUpPlayPassingClass(null);</b>
+<b class="fc"><i>201</i>&nbsp;        setBuildUpPlayDribbling(0);</b>
+<b class="fc"><i>202</i>&nbsp;        setBuildUpPlaySpeed(0);</b>
+<b class="fc"><i>203</i>&nbsp;        setBuildUpPlayPassing(0);</b>
+<b class="fc"><i>204</i>&nbsp;    }</b>
+<i>205</i>&nbsp;
+<i>206</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-12-17 20:11</div>
+</div>
+</body>
+</html>
