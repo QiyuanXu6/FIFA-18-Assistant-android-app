@@ -137,17 +137,6 @@ public class TeamData {
         return teamList;
     }
 
-    /**
-     * get the name list of all teams
-     * @return
-     */
-    public ArrayList<String> getNameList() {
-        ArrayList<String> nameList = new ArrayList<>();
-        for (Team t: teamList) {
-            nameList.add(t.getLongName());
-        }
-        return nameList;
-    }
 
     /**
      * get team logo with team api id and player data
@@ -163,4 +152,21 @@ public class TeamData {
             return map.get(id).get(0).getClubLogo();    //fetch fisrt guy's logo
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TeamData teamData = (TeamData) o;
+
+        if (teamList != null ? !teamList.equals(teamData.teamList) : teamData.teamList != null)
+            return false;
+        if (indexById != null ? !indexById.equals(teamData.indexById) : teamData.indexById != null)
+            return false;
+        if (indexByName != null ? !indexByName.equals(teamData.indexByName) : teamData.indexByName != null)
+            return false;
+        return prefixTree != null ? prefixTree.equals(teamData.prefixTree) : teamData.prefixTree == null;
+    }
+
 }
