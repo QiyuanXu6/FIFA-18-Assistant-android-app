@@ -62,6 +62,7 @@ public class Main2Activity extends AppCompatActivity implements OnItemSelectedLi
     private ImageView clubLogo;
     private Button button;
     private ListView resultTeamView;
+
     private PlayerData playerData;
     private TeamData teamData;
     private ArrayList<Team> resultTeams;
